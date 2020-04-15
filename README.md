@@ -8,6 +8,16 @@ This project is an app that shows taiohi and their whānau their learning and fi
 - Firebase (Firestore)
 - Buefy
 
-TAIOHI & WHANAU MOBILE (students & family mobile)
+Taiohi & Whānau Mobile
 ----------------------
-![Taiohi Mobile](link-to-image) 
+!(https://github.com/tairea/tt-portal/blob/master/readmeImages/mobile.jpg) 
+
+
+Taiohi & Whānau Desktop
+----------------------
+!(https://github.com/tairea/tt-portal/blob/master/readmeImages/desktop.jpg) 
+
+
+Kaitkai Desktop
+----------------------
+!(https://github.com/tairea/tt-portal/blob/master/readmeImages/teacherdash.jpg) 
