@@ -10,7 +10,7 @@ This project is an app that shows taiohi and their whānau their learning and fi
 
 Taiohi & Whānau Mobile
 ----------------------
-![Taiohi & Whānau Mobile](readmeImages/mobile.jpg) {:height="700px"}
+<img src="readmeImages/mobile.jpg" height="600">
 
 
 Taiohi & Whānau Desktop
@@ -18,6 +18,6 @@ Taiohi & Whānau Desktop
 ![Taiohi & Whānau Desktop](readmeImages/desktop.jpg) 
 
 
-Kaitkai Desktop
+Kaitiaki Desktop
 ----------------------
 ![Kaitkai Desktop](readmeImages/teacherdash.jpg) 
