@@ -10,7 +10,7 @@ This project is an app that shows taiohi and their whānau their learning and fi
 
 Taiohi & Whānau Mobile
 ----------------------
-![Taiohi & Whānau Mobile](readmeImages/mobile.jpg) 
+![Taiohi & Whānau Mobile](readmeImages/mobile.jpg) {:height="700px"}
 
 
 Taiohi & Whānau Desktop
