@@ -10,14 +10,14 @@ This project is an app that shows taiohi and their whānau their learning and fi
 
 Taiohi & Whānau Mobile
 ----------------------
-!(https://github.com/tairea/tt-portal/blob/master/readmeImages/mobile.jpg) 
+![Taiohi & Whānau Mobile](readmeImages/mobile.jpg) 
 
 
 Taiohi & Whānau Desktop
 ----------------------
-!(https://github.com/tairea/tt-portal/blob/master/readmeImages/desktop.jpg) 
+![Taiohi & Whānau Desktop](readmeImages/desktop.jpg) 
 
 
 Kaitkai Desktop
 ----------------------
-!(https://github.com/tairea/tt-portal/blob/master/readmeImages/teacherdash.jpg) 
+![Kaitkai Desktop](readmeImages/teacherdash.jpg) 
