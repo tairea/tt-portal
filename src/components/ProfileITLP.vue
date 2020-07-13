@@ -19,14 +19,6 @@ import "buefy/dist/buefy.css";
 import { db } from "./firebaseInit";
 import { firestorePlugin } from "vuefire";
 
-//=== Noun Project keys
-// var KEY = "24b258f5548c4fb6a9de4d3da8843bb0";
-// var SECRET = "9dbea31d6d5049b0af03e063ce1d6603";
-
-//=== IconFinder Keys
-// var clientID = "HK0vKY310x6Npz0cnDlYgdZJyJ0fV61sNSigQK23huGVbc4nRD0Jp9iHrH4sktU5"
-// var clientSecret = "Y9nbrsDaJF4O9L8Tk7gbJbtmTErlCYQynKGcSMEjSFgcr1ggNKaaLx4Tj64GsiF9"
-
 Vue.use(Buefy);
 Vue.use(firestorePlugin);
 

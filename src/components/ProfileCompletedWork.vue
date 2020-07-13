@@ -16,8 +16,8 @@
               </th>
               <th v-if="student.school_year >= 11">Credits</th>
               <th>Completed</th>
-              <th>Kaitiaki</th>
               <th>Grade</th>
+              <th>Comment<br>(Tap to read)</th>
             </tr>
           </thead>
           <tbody>
@@ -65,13 +65,6 @@ Science
               <td v-if="student.school_year >= 11">{{standard.assessmentCredits}}</td>
               <td>{{formatDueDate(standard.dueDate)}}</td>
               <td>
-                <!-- <img class="kaitiaki-pic" src="../assets/staff_photos/ian2.jpg"> -->
-                <img
-                  class="kaitiaki-pic"
-                  v-bind:src="require('@/assets/staff_photos/' + formatTeacherName(standard.teacher) + '.jpg')"
-                >
-              </td>
-              <td>
                 <span
                   v-if="standard.completed == 'Not Achieved'"
                   class="tag is-danger"
@@ -97,6 +90,13 @@ Science
                   class="tag is-light"
                 >{{standard.completed.toUpperCase()}}</span>
               </td>
+              <td>
+                  <b-tooltip
+                    :label="standard.teacherComment"
+                    position="is-left" size="is-medium" multilined anitmated>
+                    <img class="kaitiaki-pic" v-bind:src="require('@/assets/staff_photos/' + formatTeacherName(standard.teacher) + '.jpg')">
+                  </b-tooltip>
+                </td>
             </tr>
           </tbody>
         </table>

@@ -6,7 +6,9 @@ import Dashboard from '@/components/Dashboard'
 import TeacherDashboard from '@/components/TeacherDashboard'
 import DashboardOverview from '@/components/DashboardOverview'
 import ReportsA4 from '@/components/ReportsA4'
+import JuniorITLPA4 from '@/components/JuniorITLPA4'
 import DashboardA4Ruakura from '@/components/DashboardA4Ruakura'
+import Screen from '@/components/Screen'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -41,7 +43,7 @@ let router = new Router({
     {
       path: '/reports',
       name: 'reportsA4',
-      component: ReportsA4,
+      component: JuniorITLPA4,
       meta: {
         requiresAuth: true
       }
@@ -60,6 +62,14 @@ let router = new Router({
       component: DashboardOverview,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: '/screen',
+      name: 'screen',
+      component: Screen,
+      meta: {
+          requiresAuth: true
       }
     },
   ],

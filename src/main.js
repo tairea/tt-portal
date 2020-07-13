@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import firebase from 'firebase'
 import { firestorePlugin } from "vuefire";
+import vuetify from '@/plugins/vuetify' // path to vuetify export
 
 Vue.config.productionTip = false
 
@@ -16,6 +17,7 @@ firebase.auth().onAuthStateChanged(() => {
     app = new Vue({
       el: '#app',
       router,
+      vuetify,
       render: h => h(App)
     })
   }

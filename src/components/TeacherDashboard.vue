@@ -26,7 +26,7 @@ import ProfileDetails from "./ProfileDetails.vue";
 import ProfileITLP from "./ProfileITLP.vue";
 import ProfileFitness from "./ProfileFitness.vue";
 import ProfileComments from "./ProfileComments.vue";
-import ProfileCommentsRuakura from "./ProfileCommentsRuakura.vue";
+// import ProfileCommentsRuakura from "./ProfileCommentsRuakura.vue";
 import ProfileCurrentWork from "./ProfileCurrentWork.vue";
 import ProfileOverviewWork from "./ProfileOverviewWork.vue";
 
@@ -122,23 +122,18 @@ hr {
 }
 
 /* If viewed on computer */
-@media (min-width: 1200px) {
-  .dashboardProfile {
+.profileDetails {
     width: 100%;
+  }
+
+  .profileWork {
+    width: 30%;
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
+  .profileCurrent {width: 100%;}
+  .profileCompleted {width: 100%;}
 
-  .profileDetails {
-    width: 100%;
-  }
-
-  .profileCurrent,
-  .profileFinished,
-  .profileFitness {
-    width: 30% !important;
-    /* border: solid 2px red; */
-  }
-}
+  .profileFinished {width: 30%;}
+  .profileFitness {width: 30%;}
 </style>

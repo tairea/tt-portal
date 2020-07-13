@@ -6,8 +6,14 @@
         <ProfileDetails :overview="true" :student="student" class="margin-5 profileDetails" />
         <!-- <ProfileITLP :student="student"/> -->
         <!-- <ProfileComments :student="student"/> -->
-        <ProfileCurrentWork :student="student" class="profileCurrent" />
-        <ProfileCompletedWork :student="student" class="profileCompleted" />
+        <div v-if="isDesktop()" class="container profileWork">
+          <ProfileCurrentWork :student="student" class="profileCurrent" />
+          <ProfileCompletedWork :student="student" class="profileCompleted" />
+        </div>
+        <div v-else>
+          <ProfileCurrentWork :student="student" class="profileCurrent" />
+          <ProfileCompletedWork :student="student" class="profileCompleted" />
+        </div>
         <ProfileOverviewWork :student="student" class="profileFinished" />
         <ProfileFitness :student="student" class="profileFitness" />
         <hr />
@@ -41,10 +47,10 @@ Vue.use(Buefy);
 import { studentsDb } from "./firebaseInit";
 import Navbar from "./Navbar.vue";
 import ProfileDetails from "./ProfileDetails.vue";
-import ProfileITLP from "./ProfileITLP.vue";
+// import ProfileITLP from "./ProfileITLP.vue";
 import ProfileFitness from "./ProfileFitness.vue";
 import ProfileComments from "./ProfileComments.vue";
-import ProfileCommentsRuakura from "./ProfileCommentsRuakura.vue";
+// import ProfileCommentsRuakura from "./ProfileCommentsRuakura.vue";
 import ProfileCurrentWork from "./ProfileCurrentWork.vue";
 import ProfileCompletedWork from "./ProfileCompletedWork.vue";
 import ProfileOverviewWork from "./ProfileOverviewWork.vue";
@@ -54,9 +60,9 @@ export default {
   components: {
     Navbar,
     ProfileDetails,
-    ProfileITLP,
+    // ProfileITLP,
     ProfileFitness,
-    ProfileComments,
+    // ProfileComments,
     ProfileCurrentWork,
     ProfileCompletedWork,
     ProfileOverviewWork
@@ -70,6 +76,9 @@ export default {
     };
   },
   methods: {
+    isDesktop() {
+      return screen.width > 1200
+    },
     logout: function() {
       firebase
         .auth()
@@ -88,7 +97,7 @@ export default {
         // studentsDb.orderBy("school_year")
       );
     },
-    students(students) {
+    students() {
       this.$set(this, "loadedStudents", true);
     }
   },
@@ -154,11 +163,16 @@ hr {
     width: 100%;
   }
 
-  .profileCurrent,
-  .profileFinished,
-  .profileFitness {
-    width: 30% !important;
-    /* border: solid 2px red; */
+  .profileWork {
+    order: 2;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
   }
+  .profileCurrent {width: 100%;}
+  .profileCompleted {width: 100%;}
+
+  .profileFinished {order: 1; width: 30% !important;}
+  .profileFitness {order: 3; width: 30% !important;}npm
 }
 </style>

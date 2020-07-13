@@ -16,8 +16,8 @@
               </th>
               <th v-if="student.school_year >= 11">Credits</th>
               <th>Due</th>
-              <th>Kaitiaki</th>
-              <th>Comment</th>
+              <th>Progress</th>
+              <th>Comment<br>(Tap to read)</th>
             </tr>
           </thead>
           <tbody>
@@ -37,10 +37,7 @@ Financial Literacy
 Work Ready
 Science
                 -->
-                <span
-                  v-if="standard.subject == 'Innovation'"
-                  class="tag is-digi is-normal"
-                >INNO</span>
+                <span v-if="standard.subject == 'Innovation'" class="tag is-digi is-normal">INNO</span>
                 <span v-if="standard.subject == 'English'" class="tag is-eng is-normal">ENG</span>
                 <span v-if="standard.subject == 'Work Ready'" class="tag is-eng is-normal">WORK</span>
                 <span v-if="standard.subject == 'Science'" class="tag is-sci is-normal">SCI</span>
@@ -55,35 +52,23 @@ Science
                 <span v-if="standard.subject == 'Physical Education & Health'" class="tag is-pe is-normal">PE&H</span>
                 <span v-if="standard.subject == 'Project Based Learning'" class="tag is-pbl is-normal">PBL</span>
                 <span v-if="standard.subject == 'Dance'" class="tag is-pbl is-normal">DANC</span>
-                <span
-                  v-if="standard.subject == 'Financial Literacy'"
-                  class="tag is-math is-normal"
-                >FILIT</span>
+                <span v-if="standard.subject == 'Financial Literacy'" class="tag is-math is-normal">FILIT</span>
               </td>
               <td v-if="!overview && student.school_year >= 11">{{standard.assessmentNum}}</td>
               <td>{{standard.assessmentName}}</td>
               <td v-if="student.school_year >= 11">{{standard.assessmentCredits}}</td>
               <td v-bind:class="isOverdue(standard.dueDate)">{{formatDueDate(standard.dueDate)}}</td>
               <td>
-                <!-- <img class="kaitiaki-pic" src="../assets/staff_photos/ian2.jpg"> -->
-                <img
-                  class="kaitiaki-pic"
-                  v-bind:src="require('@/assets/staff_photos/' + formatTeacherName(standard.teacher) + '.jpg')"
-                >
+                <span v-if="standard.status == 'On-track'" class="tag is-success">{{standard.status}}</span>
+                <span v-if="standard.status == 'At risk'" class="tag is-warning">{{standard.status}}</span>
+                <span v-if="standard.status == 'Off-track'" class="tag is-danger">{{standard.status}}</span>
               </td>
               <td>
-                <span
-                  v-if="standard.status == 'On-track'"
-                  class="tag is-success"
-                >{{standard.teacherComment}}</span>
-                <span
-                  v-if="standard.status == 'At risk'"
-                  class="tag is-warning"
-                >{{standard.teacherComment}}</span>
-                <span
-                  v-if="standard.status == 'Off-track'"
-                  class="tag is-danger"
-                >{{standard.teacherComment}}</span>
+                <b-tooltip
+                  :label="standard.teacherComment"
+                  position="is-left" size="is-medium" multilined anitmated>
+                  <img class="kaitiaki-pic" v-bind:src="require('@/assets/staff_photos/' + formatTeacherName(standard.teacher) + '.jpg')">
+                </b-tooltip>
               </td>
             </tr>
           </tbody>
@@ -94,168 +79,176 @@ Science
 </template>
 
 <script>
-import Vue from "vue";
-import Buefy from "buefy";
-import "buefy/dist/buefy.css";
-import { db } from "./firebaseInit";
+  import Vue from "vue";
+  import Buefy from "buefy";
+  import "buefy/dist/buefy.css";
+  import {
+    db
+  } from "./firebaseInit";
 
-Vue.use(Buefy);
+  Vue.use(Buefy);
 
-export default {
-  name: "ProfileCurrentWork",
-  props: ["student", "overview"],
-  data() {
-    return {
-      standards: []
-    };
-  },
-  computed: {
-    currentStandards() {
-      //filter by current
-      var currentStands = this.standards.filter(x => x.completed === "Current");
-      //sort by dueDate
-      return currentStands.sort((a, b) =>
-        a.dueDate > b.dueDate ? 1 : b.dueDate > a.dueDate ? -1 : 0
+  export default {
+    name: "ProfileCurrentWork",
+    props: ["student", "overview"],
+    data() {
+      return {
+        standards: []
+      };
+    },
+    computed: {
+      currentStandards() {
+        //filter by current
+        var currentStands = this.standards.filter(x => x.completed === "Current");
+        //sort by dueDate
+        return currentStands.sort((a, b) =>
+          a.dueDate > b.dueDate ? 1 : b.dueDate > a.dueDate ? -1 : 0
+        );
+      }
+    },
+    mounted() {
+      this.$bind(
+        "standards",
+        db.collection(`/students/${this.student.id}/openCredits2020`)
       );
-    }
-  },
-  mounted() {
-    this.$bind(
-      "standards",
-      db.collection(`/students/${this.student.id}/openCredits2020`)
-    );
-    // console.log("this.standards");
-    // console.log(this.standards);
-  },
-  methods: {
-    formatDueDate(timestamp) {
-      if (timestamp.seconds == null || timestamp.seconds == "") {
-        return "TBC";
-      }
-      if (timestamp == "ongoing") {
-        return "Ongoing"
-      }
-      if (typeof timestamp === "string") {
-        return timestamp;
-      }
-
-      // convert seconds to new date
-      timestamp = new Date(timestamp.seconds * 1000)
-
-      // var date = timestamp.toDate();
-      var month = timestamp.getMonth();
-      var day = timestamp.getDate();
-      var months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "June",
-        "July",
-        "Aug",
-        "Sept",
-        "Oct",
-        "Nov",
-        "Dec"
-      ];
-      return day + " " + months[month];
+      // console.log("this.standards");
+      // console.log(this.standards);
     },
-    formatTeacherName: function(name) {
-      let teacherName = name.split(" ")[1].toLowerCase();
-      // console.log("teacher name is: " + teacherName)
-      return teacherName
-    },
-    isOverdue(timestamp) {
-      if (timestamp == null || timestamp == "") {
-        return;
+    methods: {
+      formatDueDate(timestamp) {
+        if (timestamp.seconds == null || timestamp.seconds == "") {
+          return "TBC";
+        }
+        if (timestamp == "ongoing") {
+          return "Ongoing"
+        }
+        if (typeof timestamp === "string") {
+          return timestamp;
+        }
+
+        // convert seconds to new date
+        timestamp = new Date(timestamp.seconds * 1000)
+
+        // var date = timestamp.toDate();
+        var month = timestamp.getMonth();
+        var day = timestamp.getDate();
+        var months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "June",
+          "July",
+          "Aug",
+          "Sept",
+          "Oct",
+          "Nov",
+          "Dec"
+        ];
+        return day + " " + months[month];
+      },
+      formatTeacherName: function (name) {
+        let teacherName = name.split(" ")[1].toLowerCase();
+        // console.log("teacher name is: " + teacherName)
+        return teacherName
+      },
+      isOverdue(timestamp) {
+        if (timestamp == null || timestamp == "") {
+          return;
+        }
+        // if (typeof timestamp === "string") {
+        //   return timestamp;
+        // }
+        // var dueDate = timestamp.toDate();
+        var dueDate = new Date(timestamp.seconds * 1000)
+        var now = new Date();
+        if (now > dueDate) {
+          return "overdue";
+        } else {
+          return;
+        }
+        // console.log("due date timestamp:", dueDate);
+        // console.log("now timestamp:", now);
       }
-      // if (typeof timestamp === "string") {
-      //   return timestamp;
-      // }
-      // var dueDate = timestamp.toDate();
-      var dueDate = new Date(timestamp.seconds * 1000)
-      var now = new Date();
-      if (now > dueDate) {
-        return "overdue";
-      } else {
-        return;
-      }
-      // console.log("due date timestamp:", dueDate);
-      // console.log("now timestamp:", now);
     }
-  }
-};
+  };
 </script>
 
 <style scoped>
-.table {
-  width: 100%;
-}
+  .table {
+    width: 100%;
+  }
 
-.tableOverview {
-  width: 80%;
-  margin: auto;
-}
+  .tableOverview {
+    width: 80%;
+    margin: auto;
+  }
 
-th,
-td {
-  font-size: 0.6em;
-  text-align: center !important;
-  width: 50px;
-  padding: 2px 0px;
-}
+  th,
+  td {
+    font-size: 0.6em;
+    text-align: center !important;
+    width: 50px;
+    padding: 2px 0px;
+  }
 
-.table td,
-.table th {
-  padding-left: 0;
-  padding-right: 0;
-}
+  .table td,
+  .table th {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-.tag {
-  font-size: 1em !important;
-}
+  .tag {
+    font-size: 1em !important;
+  }
 
-.kaitiaki-pic {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  object-fit: cover;
-}
+  .kaitiaki-pic {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 
-.overdue {
-  /* color: #ce2d4f; */
-  color: red;
-  font-weight: bold;
-}
+  .overdue {
+    /* color: #ce2d4f; */
+    color: red;
+    font-weight: bold;
+  }
 
-/*Subject tag colours*/
-.tag:not(body).is-digi {
-  background-color: #7957d5;
-  color: white;
-}
-.tag:not(body).is-eng {
-  background-color: #efabff;
-  color: white;
-}
-.tag:not(body).is-sci {
-  background-color: #01d1b2;
-  color: white;
-}
-.tag:not(body).is-math {
-  background-color: #209cee;
-  color: white;
-}
-.tag:not(body).is-pe {
-  background-color: #1a181b;
-  color: white;
-}
-.tag:not(body).is-tika {
-  background-color: #ce2d4f;
-  color: white;
-}
-.tag:not(body).is-pbl {
-  background-color: #7957d5;
-  color: white;
-}
+  /*Subject tag colours*/
+  .tag:not(body).is-digi {
+    background-color: #7957d5;
+    color: white;
+  }
+
+  .tag:not(body).is-eng {
+    background-color: #efabff;
+    color: white;
+  }
+
+  .tag:not(body).is-sci {
+    background-color: #01d1b2;
+    color: white;
+  }
+
+  .tag:not(body).is-math {
+    background-color: #209cee;
+    color: white;
+  }
+
+  .tag:not(body).is-pe {
+    background-color: #1a181b;
+    color: white;
+  }
+
+  .tag:not(body).is-tika {
+    background-color: #ce2d4f;
+    color: white;
+  }
+
+  .tag:not(body).is-pbl {
+    background-color: #7957d5;
+    color: white;
+  }
 </style>

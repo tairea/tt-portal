@@ -35,44 +35,47 @@
       <!-- 4KM -->
       <div class="chartLeftFlex">
         <img class="fitnessIcon" v-bind:src="require('@/assets/running.png')" />
-        <!-- <canvas
+        <canvas
           v-bind:id="studentName+'RunChart'"
           style="position: relative; height: 250px; width:250px"
-        ></canvas> -->
+        ></canvas>
 
-        <div style="display: flex; flex-direction: column;">
+        <!-- <div style="display: flex; flex-direction: column;">
           <div>
             <div style="font-weight: bold; margin: 10px 0;">4KM</div>
+            
             <div v-bind:id="studentName+'Dom4k'" style="font-size: 4em; font-weight: 900; color: #209cee;">24</div>
+
             <div>MINS</div>
-          </div>
+          </div> -->
           <!-- <div style="border: 2px solid blue; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <div><span><img class="arrow" v-bind:src="require('@/assets/up.svg')" /></span> 2MINS</div>
             <div><span><img class="arrow" v-bind:src="require('@/assets/down.svg')" /></span> 1MINS</div>
           </div> -->
-        </div>
+        <!-- </div> -->
 
       </div>
 
       <!-- YOYO -->
       <div class="chartCenterFlex">
         <img class="fitnessIcon" v-bind:src="require('@/assets/yoyo.png')" />
-        <!-- <canvas
+        <canvas
           v-bind:id="studentName+'YoyoChart'"
           style="position: relative; height: 250px; width:250px"
-        ></canvas> -->
-        <div style="display: flex; flex-direction: column;">
+        ></canvas>
+        <!-- <div style="display: flex; flex-direction: column;">
           <div>
             <div style="font-weight: bold; margin: 10px 0;">YOYO</div>
             
             <div v-bind:id="studentName+'DomYoyo'" style="font-size: 4em; font-weight: 900; color: #23d160;">14.4</div>
+
             <div>LEVEL</div>
-          </div>
+          </div> -->
           <!-- <div style="border: 2px solid blue; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <div><span><img class="arrow" v-bind:src="require('@/assets/up.svg')" /></span> 2MINS</div>
             <div><span><img class="arrow" v-bind:src="require('@/assets/down.svg')" /></span> 1MINS</div>
           </div> -->
-        </div>
+        <!-- </div> -->
       </div>
 
       <!-- STRENGTH -->
@@ -168,8 +171,8 @@ export default {
   },
   watch: {
     fitnessData: {
-      // handler: "loadChart"
-      handler: "loadFitnessDOM"
+      handler: "loadChart"
+      // handler: "loadFitnessDOM"  * loadFitnessDOM is for only one set of data. no charts *
     }
   },
   computed: {},
@@ -300,24 +303,45 @@ export default {
           console.log("switch broke. dunno");
       }
     },
-    loadFitnessDOM() {
-      //4K DOM
-      var run = document.getElementById(this.studentName + "Dom4k");
-      run.innerText = this.getFitnessData("run4k")
-      //YOYO DOM
-      var yoyo = document.getElementById(this.studentName + "DomYoyo");
-      yoyo.innerText = this.getFitnessData("yoyo")
-      //STRENGTH DOM
-      var pressups = document.getElementById(this.studentName + "DomPressups");
-      var situps = document.getElementById(this.studentName + "DomSitups");
-      var airsquats = document.getElementById(this.studentName + "DomAirquats");
-      var burpees = document.getElementById(this.studentName + "DomBurpees");
-      pressups.innerText = this.getFitnessData("pressups")
-      situps.innerText = this.getFitnessData("situps")
-      airsquats.innerText = this.getFitnessData("airsquats")
-      burpees.innerText = this.getFitnessData("burpees")
-      
+    getDateLabels(activity) {
+      //get fitness data
+      let fitnessStuff = this.fitnessData.filter(
+        fit => fit.nsn == this.student.id
+      );
+      if (!fitnessStuff) {
+        fitnessStuff = "No fitness data";
+      }
+      switch (activity) {
+        case "run4kDates":
+          return fitnessStuff[0].run4kDates;
+        case "strengthDates":
+          return fitnessStuff[0].strengthDates;
+        case "yoyoDates":
+          return fitnessStuff[0].yoyoDates;
+        default:
+          console.log("switch broke. dunno");
+      }
     },
+    
+
+    // loadFitnessDOM() {
+    //   //4K DOM
+    //   var run = document.getElementById(this.studentName + "Dom4k");
+    //   run.innerText = this.getFitnessData("run4k")
+    //   //YOYO DOM
+    //   var yoyo = document.getElementById(this.studentName + "DomYoyo");
+    //   yoyo.innerText = this.getFitnessData("yoyo")
+    //   //STRENGTH DOM
+    //   var pressups = document.getElementById(this.studentName + "DomPressups");
+    //   var situps = document.getElementById(this.studentName + "DomSitups");
+    //   var airsquats = document.getElementById(this.studentName + "DomAirquats");
+    //   var burpees = document.getElementById(this.studentName + "DomBurpees");
+    //   pressups.innerText = this.getFitnessData("pressups")
+    //   situps.innerText = this.getFitnessData("situps")
+    //   airsquats.innerText = this.getFitnessData("airsquats")
+    //   burpees.innerText = this.getFitnessData("burpees")
+      
+    // },
     loadChart() {
       // console.log("loading chart...");
       var run = document.getElementById(this.studentName + "RunChart");
@@ -339,7 +363,8 @@ export default {
               fill: false
             },
           ],
-          labels: this.getLengthArray("run4k")
+          // labels: this.getLengthArray("run4k")
+          labels: this.getDateLabels("run4kDates"),
         },
         options: {
           responsive: true,
@@ -411,7 +436,7 @@ export default {
               spanGaps: false
             }
           ],
-          labels: this.getLengthArray("yoyo")
+          labels: this.getDateLabels("yoyoDates")
         },
         options: {
           responsive: true,
