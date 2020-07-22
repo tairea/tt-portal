@@ -17,6 +17,7 @@
     "core-js": "^2.6.5",
     "firebase": "^5.9.4",
     "firebaseui": "^3.5.2",
+    "luxon": "^1.24.1",
     "oauth": "^0.9.12",
     "request": "^2.88.0",
     "reveal.js": "^4.0.2",

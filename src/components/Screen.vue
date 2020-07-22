@@ -1,7 +1,6 @@
 <template>
     <div id="app">
-        <!-- <img src="./assets/logo.png">
-          <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+
         <div class="reveal">
             <div class="slides">
                 
@@ -11,9 +10,9 @@
                 </section>
                 
                 <!-- Slide 2 -->
-                <!-- <section>
-                    Timetable
-                </section> -->
+                <section>
+                    <Timetable/>
+                </section>
 
             </div>
         </div>
@@ -24,11 +23,13 @@
     import { db } from "./firebaseInit";
     import Reveal from 'reveal.js';
     import CreditLeaderboard from '@/components/CreditLeaderboard.vue'
+    import Timetable from '@/components/Timetable.vue'
 
     export default {
         name: 'app',
         components: {
-            CreditLeaderboard
+            CreditLeaderboard,
+            Timetable
         },
         data() {
             return {
@@ -62,6 +63,10 @@
         color: #2c3e50;
         /* margin-top: 60px; */
         height: 100vh;
+    }
+
+    .reveal .slides > section {
+        padding: 0 !important;
     }
     
 </style>

@@ -173,6 +173,6 @@ hr {
   .profileCompleted {width: 100%;}
 
   .profileFinished {order: 1; width: 30% !important;}
-  .profileFitness {order: 3; width: 30% !important;}npm
+  .profileFitness {order: 3; width: 30% !important;}
 }
 </style>
