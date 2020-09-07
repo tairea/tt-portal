@@ -3,25 +3,77 @@
 
         <div class="reveal">
             <div class="slides">
-                
+
                 <!-- Slide 1 -->
                 <section class="pa-0">
                     <p class="title">Year 11s</p>
                     <div class="flexWrap">
-                        <TaiohiCard v-for="(student, index) in getSortStudents(11)" :key="`${student.school_year + '-' +index}`" :student="student" class="taiohiCard"/>
+                        <TaiohiCard v-for="(student, index) in getSortStudents(11)"
+                            :key="`${student.school_year + '-' +index}`" :student="student" class="taiohiCard" />
+                    </div>
+                    <!-- KEY -->
+                    <div class="chart-key">
+                        <div style="display: flex;">
+                            <div class="square" style="background-color: #23d160">
+                            </div>
+                            <span style="font-size: 0.8rem;">Passed</span>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="square" style="background-color: #ff3860">
+                            </div>
+                            <span style="font-size: 0.8rem;">Not Achieved</span>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="square" style="background-color: #ffdc57">
+                            </div>
+                            <span style="font-size: 0.8rem;">Current</span>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="square" style="background-color: #209cee">
+                            </div>
+                            <span style="font-size: 0.8rem;">Upcoming</span>
+                        </div>
                     </div>
                 </section>
-                
+
                 <!-- Slide 2 -->
                 <section>
                     <p class="title">Year 12s</p>
                     <div class="flexWrap">
-                        <TaiohiCard v-for="(student, index) in getSortStudents(12)" :key="`${student.school_year + '-' +index}`" :student="student" class="taiohiCard"/>
+                        <TaiohiCard v-for="(student, index) in getSortStudents(12)"
+                            :key="`${student.school_year + '-' +index}`" :student="student" class="taiohiCard" />
                     </div>
+
+                    <div class="spacer" style="margin:25px;"></div>
+                    
                     <p class="title">Year 13s</p>
                     <div class="flexWrap">
-                            <TaiohiCard  v-for="(student, index) in getSortStudents(13)" :key="`${student.school_year + '-' +index}`" :student="student" class="taiohiCard"/>
+                        <TaiohiCard v-for="(student, index) in getSortStudents(13)"
+                            :key="`${student.school_year + '-' +index}`" :student="student" class="taiohiCard" />
                     </div>
+                    <!-- KEY -->
+                    <div class="chart-key">
+                            <div style="display: flex;">
+                                <div class="square" style="background-color: #23d160">
+                                </div>
+                                <span style="font-size: 0.8rem;">Passed</span>
+                            </div>
+                            <div style="display: flex;">
+                                <div class="square" style="background-color: #ff3860">
+                                </div>
+                                <span style="font-size: 0.8rem;">Not Achieved</span>
+                            </div>
+                            <div style="display: flex;">
+                                <div class="square" style="background-color: #ffdc57">
+                                </div>
+                                <span style="font-size: 0.8rem;">Current</span>
+                            </div>
+                            <div style="display: flex;">
+                                <div class="square" style="background-color: #209cee">
+                                </div>
+                                <span style="font-size: 0.8rem;">Upcoming</span>
+                            </div>
+                        </div>
                 </section>
 
             </div>
@@ -30,7 +82,9 @@
 </template>
 
 <script>
-    import { db } from "./firebaseInit";
+    import {
+        db
+    } from "./firebaseInit";
     import Reveal from 'reveal.js';
     import CreditLeaderboard from '@/components/CreditLeaderboard.vue'
     import Timetable from '@/components/Timetable.vue'
@@ -58,7 +112,7 @@
                 progress: false,
                 controls: false,
             })
-            this.$bind( "students", db.collection('students').where("school_year", ">=", 11 ))
+            this.$bind("students", db.collection('students').where("school_year", ">=", 11))
         },
         methods: {
             sortStudents() {
@@ -94,7 +148,7 @@
         height: 100vh;
     }
 
-    .reveal .slides > section {
+    .reveal .slides>section {
         padding: 0 !important;
     }
 
@@ -108,5 +162,17 @@
         width: calc(50% - 20px);
         box-sizing: border-box;
     }
-    
+
+    .chart-key {
+        margin-top: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .square {
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+    }
 </style>
