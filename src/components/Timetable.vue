@@ -116,6 +116,9 @@
             // get time for clock
             time() {return this.now.toFormat('hh:mm')},
             // ---- Set Timetable data
+            dasharray() {
+              return this.timerProgress + " " + this.$options.circumference
+          },
             
         },
         watch : {
@@ -236,9 +239,6 @@
                     this.timerSecond = 59;
                 }
             },
-            dasharray() {
-                return this.timerProgress + " " + this.$options.circumference
-            },
         }
     }
 </script>
@@ -256,6 +256,7 @@
     flex-direction: column;
     height: 100vh;
     width: 100%;
+    background-color: white;
 
     .today {
         width: 100%;

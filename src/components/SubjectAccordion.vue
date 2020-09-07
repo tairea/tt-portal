@@ -32,7 +32,7 @@
       </p>
       <div slot="footer" class="accordionFooter">
 
-        <p v-if="isComment(subject.subject)" class="reportComment">"{{getComment(subject.subject)}}"</p>
+        <!-- <p v-if="isComment(subject.subject)" class="reportComment">"{{getComment(subject.subject)}}"</p> -->
         <a v-bind:href="getTeacherEmail(subject.teacher)">
 
           <table class="footerTable">
@@ -163,10 +163,15 @@
         });
       },
       formatTeacherName: function (name) {
-        //format from 'Pa Ian' to 'ian'
-        let teacherName = name.split(" ")[1].toLowerCase()
-        // console.log("teacher name for photo is: " + teacherName)
-        return teacherName
+        console.log("trying to split:", name)
+        let teacherName = name.split(" ")
+        if (teacherName.length ==  1) {
+          return teacherName[0].toLowerCase()
+        } else if (teacherName.length > 0 && teacherName[1] !== "-") {
+          return teacherName[1].toLowerCase();
+        } else {
+          return teacherName[2].toLowerCase();
+        }
       },
       getTotals: function (subjectName) {
         const subjectStandards = this.filterSubjectStandards(subjectName)

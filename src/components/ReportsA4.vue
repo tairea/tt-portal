@@ -4,7 +4,7 @@
       <!-- PAGE 1: COVER -->
       <section
         class="sheet padding-10mm coverPage"
-        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-380px 180px', backgroundRepeat: 'no-repeat'}"
+        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-295px 180px', backgroundRepeat: 'no-repeat'}"
       >
         <ProfileDetailsV2 :student="student" :overview="true" :a4="true" class="margin-5" />
         <!-- <hr class="spacer100" />
@@ -27,7 +27,7 @@
       <!-- PAGE 2: FITNESS & CONDITIONING -->
       <section
         class="sheet padding-10mm"
-        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-380px 180px', backgroundRepeat: 'no-repeat'}"
+        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-295px 180px', backgroundRepeat: 'no-repeat'}"
       >
         <FitnessPage :student="student" :a4="true" />
       </section>
@@ -35,7 +35,7 @@
       <!-- PAGE 3: COMMENTS 1 -->
       <section
         class="sheet padding-10mm"
-        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-380px 180px', backgroundRepeat: 'no-repeat'}"
+        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-295px 180px', backgroundRepeat: 'no-repeat'}"
       >
         <ProfileCommentsV2 :student="student" :firstPage="true" />
       </section>
@@ -43,7 +43,7 @@
       <!-- PAGE 4: COMMENTS 2-->
       <section
         class="sheet padding-10mm"
-        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-380px 180px', backgroundRepeat: 'no-repeat'}"
+        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-295px 180px', backgroundRepeat: 'no-repeat'}"
       >
         <ProfileCommentsV2 :student="student" :secondPage="true" />
       </section>
@@ -51,18 +51,18 @@
       <!-- PAGE 5: COMMENTS 3-->
       <section
         class="sheet padding-10mm"
-        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-380px 180px', backgroundRepeat: 'no-repeat'}"
+        :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-295px 180px', backgroundRepeat: 'no-repeat'}"
       >
         <ProfileCommentsV2 :student="student" :thirdPage="true" />
       </section>
 
       <!-- PAGE 5: COMMENTS 4-->
-      <section
+      <!-- <section
         class="sheet padding-10mm"
         :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-380px 180px', backgroundRepeat: 'no-repeat'}"
       >
         <ProfileCommentsV2 :student="student" :fourthPage="true" />
-      </section>
+      </section> -->
 
 
     </div>
@@ -113,7 +113,9 @@ export default {
       students: [],
       // student: null,
       loadedStudents: false,
-      image: require("@/assets/tohuLight.svg")
+      // image: require("@/assets/tohuLight.svg")
+      // image: require("@/assets/tohu-grey.svg")
+      image: require("@/assets/tohu-mid-grey.svg")
     };
   },
   methods: {
@@ -139,9 +141,10 @@ export default {
         "students",
         //  studentsDb.where("email", "array-contains", user.email)
         // studentsDb.orderBy("school_year") //LOADS ALL STUDENTS
-        studentsDb.where("school_year", ">=", 11 ) //LOAD SENIORS
+        // studentsDb.where("school_year", ">=", 11 ) //LOAD SENIORS
+        // studentsDb.where("school_year", ">=", 13 ) //LOAD SENIORS
         // studentsDb.where("school_year", "<", 11 ) //LOADS JUNIORS
-        // studentsDb.where("nsn", "==", 131601907 ) //LOAD by NSN
+        studentsDb.where("nsn", "==", 134316380 ) //LOAD by NSN
       );
     },
     students(students) {

@@ -3,13 +3,13 @@
     <h2 class="title is-6 has-text-centered" v-if="!overview">KAITIAKI COMMENTS</h2>
 
     <!-- FIRST PAGE TUTOA -->
-    <IndividualComment v-if="firstPage == true" :student="student" :reportComments="reportComments.slice(0,3)" :standards="standards" />
+    <IndividualComment v-if="firstPage == true" :student="student" :reportComments="reportComments.slice(0,2)" :standards="standards" />
 
     <!-- SECOND PAGE TUTOA -->
-    <IndividualComment v-else-if="secondPage == true" :student="student" :reportComments="reportComments.slice(3,6)" :standards="standards" />
+    <IndividualComment v-else-if="secondPage == true" :student="student" :reportComments="reportComments.slice(2,4)" :standards="standards" />
 
     <!-- THIRD PAGE TUTOA -->
-    <IndividualComment v-else-if="thirdPage == true" :student="student" :reportComments="reportComments.slice(6,9)" :standards="standards" />
+    <IndividualComment v-else-if="thirdPage == true" :student="student" :reportComments="reportComments.slice(4,6)" :standards="standards" />
 
     <!-- FOURTH PAGE TUTOA -->
     <IndividualComment v-else-if="thirdPage == true" :student="student" :reportComments="reportComments.slice(6,report.length)" :standards="standards" />
@@ -43,11 +43,11 @@ export default {
   mounted() {
     this.$bind(
       "standards",
-      db.collection(`/students/${this.student.id}/openCredits`)
+      db.collection(`/students/${this.student.id}/openCredits2020`)
     );
     this.$bind(
       "reportComments",
-      db.collection(`/students/${this.student.id}/reportComments`)
+      db.collection(`/students/${this.student.id}/reportComments2020`)
     ).then(() => {
           for (var i = this.reportComments.length - 1; i >= 0; --i) {
           if (this.reportComments[i].id == "Fitness & Conditioning") {

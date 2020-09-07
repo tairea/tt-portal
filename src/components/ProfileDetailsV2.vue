@@ -13,11 +13,10 @@
 
       <!-- PROFILE PIC -->
       <div class="column profileContainer">
-        <img
-          id="profile-pic"
-          v-bind:src="require('@/assets/student_photos/' + formatStudentName(student.given_name) + '.png')"
-		  
-        />
+        
+        <!-- <img id="profile-pic" v-bind:src="require('@/assets/student_photos/' + formatStudentName(student.given_name) + '.png')" /> -->
+        <!-- high quality folder  -->
+        <img id="profile-pic" v-bind:src="require('@/assets/taiohiIdPhotos/' + formatStudentName(student.given_name) + '.png')" />
       </div>
 
       
@@ -30,7 +29,7 @@
 
     	  <!-- EOY REPORT 2019 -->
         <div class="report" style="margin-top: 60px;">
-          <h2 v-if="a4"  style="font-weight: bold;">End of Year Report<br><span style="font-size: 1.5em;">2019</span></h2>
+          <h2 v-if="a4"  style="font-weight: bold;">Mid-year Report<br><span style="font-size: 1.5em;">2020</span></h2>
         </div>
 
       </div>
@@ -44,15 +43,21 @@
               v-if="student.school_year >= 11 && overview && ruakura"
               class="creditTotal"
             >{{getTotalRuakura()}}</h2> -->
+            
             <div
-              v-if="student.creditTotal != 0 && overview"
+              v-if="overview && student.school_year >= 11"  
               class="creditTotal"
             >
-              {{student.creditTotal}}
+            <div v-if="getTotal !== 0 || student.creditTotal !== 0">
+              <!-- {{student.creditTotal}} -->
+              <!-- {{ getTotal() }} -->
+              {{ getTotal() > student.creditTotal ? getTotal() : student.creditTotal }}
+              
               <!-- CREDITS -->
               <h2 v-if="a4 && student.school_year >= 11 && overview" class="credits" style="font-size: 0.5em; ">
                 Credits
               </h2>
+            </div>
             </div>
 			
             
@@ -79,7 +84,6 @@
           v-bind:src="require('@/assets/student_photos/ruakura/' + formatStudentName(student.given_name) + '.png')"
         /> -->
         <img
-          
           id="profile-pic"
           v-bind:src="require('@/assets/student_photos/' + formatStudentName(student.given_name) + '.png')"
         />
@@ -125,6 +129,7 @@ export default {
   },
   methods: {
     getTotal() {
+      console.log("getting total")
       //=== achieved credits
       const achievedCredits = this.standards.filter(
         stnd => stnd.completed == "Achieved"
@@ -353,8 +358,8 @@ font-family: 'Caudex', serif;
 }
 
 #profile-pic {
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
 
   /* border-radius: 50%;
   object-fit: cover;

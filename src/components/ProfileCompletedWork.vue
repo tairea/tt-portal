@@ -22,7 +22,7 @@
           </thead>
           <tbody>
             <!-- Standard Rows -->
-            <tr v-for="standard in completedStandards" :key="standard.assessmentNumber">
+            <tr v-for="standard in completedStandards()" :key="standard.assessmentNumber">
               <!-- <td v-if="!overview"> -->
               <td>
                 <!-- subjects offered:
@@ -122,16 +122,7 @@ export default {
     };
   },
   computed: {
-    completedStandards() {
-      //filter by NOT current or upcoming (aka completed)
-      var completedStands = this.standards.filter(obj => obj.completed !== "Current" && obj.completed !== "Upcoming")
-
-      //sort by dueDate (aka completed date) decsending
-      return completedStands.sort((a, b) =>
-        a.dueDate < b.dueDate ? 1 : b.dueDate < a.dueDate ? -1 : 0
-      );
-
-    }
+    
   },
   mounted() {
     this.$bind(
@@ -142,6 +133,16 @@ export default {
     // console.log(this.standards);
   },
   methods: {
+    completedStandards() {
+      //filter by NOT current or upcoming (aka completed)
+      var completedStands = this.standards.filter(obj => obj.completed !== "Current" && obj.completed !== "Upcoming")
+
+      //sort by dueDate (aka completed date) decsending
+      return completedStands.sort((a, b) =>
+        a.dueDate < b.dueDate ? 1 : b.dueDate < a.dueDate ? -1 : 0
+      );
+
+    },
     getTotal(status) {
       const standardsByStatus = this.standards.filter(
         stnd => stnd.completed == status
@@ -185,12 +186,17 @@ export default {
       ];
       return day + " " + months[month];
     },
-    formatTeacherName: function(name) {
-      let teacherName = name.split(" ")[1].toLowerCase();
-      // console.log("teacher name is: " + teacherName)
-      return teacherName
-    },
-    
+    formatTeacherName: function (name) {
+        console.log("trying to split:", name)
+        let teacherName = name.split(" ")
+        if (teacherName.length ==  1) {
+          return teacherName[0].toLowerCase()
+        } else if (teacherName.length > 0 && teacherName[1] !== "-") {
+          return teacherName[1].toLowerCase();
+        } else {
+          return teacherName[2].toLowerCase();
+        }
+      }
   }
 };
 </script>

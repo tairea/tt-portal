@@ -1,11 +1,11 @@
 <template>
   <div class="container">
 
-    <h2 class="title is-6 has-text-centered" v-if="!overview">KAITIAKI COMMENTS</h2>
+    <h2 class="title is-6 has-text-centered" v-if="!overview">FITNESS & CONDITIONING</h2>
     <!-- <div class="columns is-mobile"> -->
 
     <!-- FITNESS & CONDITIONING COMMENT -->
-    <IndividualComment  :student="student" :reportComments="reportComments.filter(fitnessComment)" :fitness="true" />
+    <!-- <IndividualComment  :student="student" :reportComments="reportComments.filter(fitnessComment)" :fitness="true" /> -->
     <!-- <IndividualComment  :student="student" :reportComments="fitnessComment" :fitness="true" /> -->
 
     <div v-if="a4" class="chartsContainerColumn">
@@ -136,11 +136,11 @@ export default {
     // get fitness data from firebase
     this.$bind(
       "fitnessData",
-      db.collection(`/students/${this.student.id}/fitnessData`)
+      db.collection(`/students/${this.student.id}/fitnessData2020`)
     );
      this.$bind(
       "reportComments",
-      db.collection(`/students/${this.student.id}/reportComments`)
+      db.collection(`/students/${this.student.id}/reportComments2020`)
     )
 
     this.studentName = this.student.given_name;
@@ -174,6 +174,9 @@ export default {
           const run4kempties = run4kTimes.flatMap((runs, i) => runs === '' ? i : []);
           //remove times and dates student wasnt there.
           const filteredrun4k = run4kTimes.filter((d, i) => run4kempties.indexOf(i) == -1)
+          // console.log(run4kTimes)
+          // console.log(run4kempties)
+          // console.log(filteredrun4k)
           return filteredrun4k;
         }
         case "yoyo":{

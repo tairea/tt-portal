@@ -29,7 +29,7 @@
 
           <div class="content reports">{{comment.reportComment}}</div>
 
-          <div v-if="!fitness" class="card-content contentStandards">
+          <div v-if="!fitness && filterSubjectStandards(comment.subject).length !== 0" class="card-content contentStandards">
             <div class="content content5050">
               <div class="table">
                 <table>
@@ -50,7 +50,7 @@
                     >
 
                       <td class="numCell has-text-left numCellWidth">
-                        {{subjectStandards.assessmentNum}}
+                        {{subjectStandards.assessmentNum.toUpperCase()}}
                       </td>
 
                       <td class="nameCell has-text-left nameCellWidth">
@@ -75,10 +75,10 @@
                   </tbody>
                 </table>
               </div>
-              <div class="pie">
-                <!-- Pie Chart.js -->
+              <!-- Pie Chart.js -->
+              <!-- <div class="pie">
                 <SubjectPiechart :student="student" :subject="comment.subject" />
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -297,7 +297,7 @@ background: linear-gradient(to left, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C
 
 .table {
   width: 70%;
-  margin: 0;
+  margin: 0 auto;
 }
 
 table {
@@ -345,6 +345,14 @@ table {
   background-color: #ffdc57;
   font-size: 0.5rem !important;
 }
+
+.Progressing.Towards.Achieved {
+  background-color: whitesmoke;
+  color: #4a4a4a;
+  font-size: 0.5rem !important;
+}
+
+
 .Achieved,
 .Merit,
 .Excellence {

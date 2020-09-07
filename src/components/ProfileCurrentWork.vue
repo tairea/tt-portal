@@ -22,7 +22,7 @@
           </thead>
           <tbody>
             <!-- Standard Rows -->
-            <tr v-for="standard in currentStandards" :key="standard.assessmentNumber">
+            <tr v-for="standard in currentStandards()" :key="standard.assessmentNumber">
               <!-- <td v-if="!overview"> -->
               <td>
                 <!-- subjects offered:
@@ -97,14 +97,7 @@ Science
       };
     },
     computed: {
-      currentStandards() {
-        //filter by current
-        var currentStands = this.standards.filter(x => x.completed === "Current");
-        //sort by dueDate
-        return currentStands.sort((a, b) =>
-          a.dueDate > b.dueDate ? 1 : b.dueDate > a.dueDate ? -1 : 0
-        );
-      }
+      
     },
     mounted() {
       this.$bind(
@@ -114,7 +107,23 @@ Science
       // console.log("this.standards");
       // console.log(this.standards);
     },
+    watch: {
+        standards: {
+        handler: "currentStandards" //TODO: call currentStandards() once standards has loaded from firebase
+        }
+    },
     methods: {
+      currentStandards() {
+        //filter by current
+        var currentStands = this.standards.filter(x => x.completed === "Current");
+        // log test
+        console.log("current standards for ",this.student.given_name)
+        console.log(this.currentStands)
+        //sort by dueDate
+        return currentStands.sort((a, b) =>
+          a.dueDate > b.dueDate ? 1 : b.dueDate > a.dueDate ? -1 : 0
+        );
+      },
       formatDueDate(timestamp) {
         if (timestamp.seconds == null || timestamp.seconds == "") {
           return "TBC";
@@ -149,9 +158,17 @@ Science
         return day + " " + months[month];
       },
       formatTeacherName: function (name) {
-        let teacherName = name.split(" ")[1].toLowerCase();
-        // console.log("teacher name is: " + teacherName)
-        return teacherName
+        console.log("trying to split:", name)
+        let teacherName = name.split(" ")
+        if (teacherName.length ==  1) {
+          return teacherName[0].toLowerCase()
+        } else if (teacherName.length > 0 && teacherName[1] !== "-") {
+          return teacherName[1].toLowerCase();
+        } else {
+          return teacherName[2].toLowerCase();
+        }
+        // return teacherName
+        
       },
       isOverdue(timestamp) {
         if (timestamp == null || timestamp == "") {

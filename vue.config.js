@@ -2,7 +2,7 @@
 module.exports = {
   // options...
   publicPath: "/portal/",
-  devServer: {
-    proxy: 'http://backend.test/',
-  }
+  // devServer: {
+  //   proxy: 'http://backend.test/',
+  // }
 }

@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-row dense>
+        <v-row>
             <v-col cols="6">
                     <!-- <p class="title">All</p>
                     <div v-for="(student, index) in sortStudents()" :key="`${student.school_year + '-' +index}`">

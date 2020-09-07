@@ -8,7 +8,9 @@ import DashboardOverview from '@/components/DashboardOverview'
 import ReportsA4 from '@/components/ReportsA4'
 import JuniorITLPA4 from '@/components/JuniorITLPA4'
 import DashboardA4Ruakura from '@/components/DashboardA4Ruakura'
-import Screen from '@/components/Screen'
+import AcademicBoard from '@/components/AcademicBoard'
+import Timetable from '@/components/Timetable'
+
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -43,6 +45,15 @@ let router = new Router({
     {
       path: '/reports',
       name: 'reportsA4',
+      // component: JuniorITLPA4,
+      component: ReportsA4,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/itlp',
+      name: 'itlp',
       component: JuniorITLPA4,
       meta: {
         requiresAuth: true
@@ -65,11 +76,19 @@ let router = new Router({
       }
     },
     {
-      path: '/screen',
-      name: 'screen',
-      component: Screen,
+      path: '/ab',
+      name: 'AcademicBoard',
+      component: AcademicBoard,
       meta: {
           requiresAuth: true
+      }
+    },
+    {
+      path: '/timetable',
+      name: 'Timetable',
+      component: Timetable,
+      meta: {
+          requiresAuth: false
       }
     },
   ],

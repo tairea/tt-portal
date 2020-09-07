@@ -81,10 +81,11 @@
       <!-- STRENGTH -->
       <div class="chartRightFlex">
         <img class="fitnessIcon" v-bind:src="require('@/assets/pullups.png')" />
-        <!-- <canvas
+        <canvas
           v-bind:id="studentName+'StrengthChart'"
           style="position: relative; height: 250px; width:250px"
-        ></canvas> -->
+        ></canvas>
+        <!--  SINGLE STRENGTH TEST (No chart)
         <div style="font-weight: bold; margin: 10px 0;">STRENGTH</div>
         <div style="display: flex; flex-direction: column; width: 100%;">
           <div style="display: flex; width: 100%;">
@@ -109,11 +110,11 @@
               <div>REPS</div>
             </div>
           </div>
-          <!-- <div style="border: 2px solid blue; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <div style="border: 2px solid blue; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <div><span><img class="arrow" v-bind:src="require('@/assets/up.svg')" /></span> 2MINS</div>
             <div><span><img class="arrow" v-bind:src="require('@/assets/down.svg')" /></span> 1MINS</div>
-          </div> -->
-        </div>
+          </div>
+        </div> -->
       </div>
     </div>
 
@@ -211,16 +212,16 @@ export default {
           // console.log("yoyo:", fitnessStuff[0].yoyo);
           return fitnessStuff[0].yoyo;
         case "pressups":
-          // console.log("preesups:", fitnessStuff[0].pressup);
+          // console.log("preesups:", fitnessStuff[0].pressups);
           return fitnessStuff[0].pressups;
         case "situps":
-          // console.log("situps:", fitnessStuff[0].situp);
+          // console.log("situps:", fitnessStuff[0].situps);
           return fitnessStuff[0].situps;
         case "burpees":
-          // console.log("pullups:", fitnessStuff[0].pullup);
+          // console.log("pullups:", fitnessStuff[0].burpees);
           return fitnessStuff[0].burpees;
         case "airsquats":
-          // console.log("pullups:", fitnessStuff[0].pullup);
+          // console.log("pullups:", fitnessStuff[0].airquats);
           return fitnessStuff[0].airsquats;
         default:
           console.log("switch broke. dunno");
@@ -524,7 +525,7 @@ export default {
               spanGaps: false
             }
           ],
-          labels: [1, 2]
+          labels: this.getDateLabels("strengthDates"),
         },
         options: {
           responsive: true,
