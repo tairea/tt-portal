@@ -1,11 +1,11 @@
 <template>
   <div class="container">
 
-    <h2 class="title is-6 has-text-centered" v-if="!overview">FITNESS & CONDITIONING</h2>
+    <!-- <h2 class="title is-6 has-text-centered" v-if="!overview">FITNESS & CONDITIONING</h2> -->
     <!-- <div class="columns is-mobile"> -->
 
     <!-- FITNESS & CONDITIONING COMMENT -->
-    <!-- <IndividualComment  :student="student" :reportComments="reportComments.filter(fitnessComment)" :fitness="true" /> -->
+    <IndividualComment  :student="student" :reportComments="reportComments.filter(fitnessComment)" :fitness="true" />
     <!-- <IndividualComment  :student="student" :reportComments="fitnessComment" :fitness="true" /> -->
 
     <div v-if="a4" class="chartsContainerColumn">
@@ -159,14 +159,19 @@ export default {
       }
     },
     getFitnessData(activity) {
+      
+
       //get fitness data
       let fitnessStuff = this.fitnessData.filter(
         fit => fit.nsn == this.student.id
       );
 
-      if (!fitnessStuff) {
-        fitnessStuff = "No fitness data";
+      // check if fitnessStuff is populated
+      if (fitnessStuff.length < 1) {
+        console.log("No fitness data");
+        return
       }
+
       switch (activity) {
         case "run4k":{
           const run4kTimes = fitnessStuff[0].run4k;
@@ -217,9 +222,13 @@ export default {
       let fitnessStuff = this.fitnessData.filter(
         fit => fit.nsn == this.student.id
       );
-      if (!fitnessStuff) {
-        fitnessStuff = "No fitness data";
+
+      // check if fitnessStuff is populated
+      if (fitnessStuff.length < 1) {
+        console.log("No fitness data");
+        return
       }
+
       switch (activity) {
         case "run4k":{
           const run4kTimes = fitnessStuff[0].run4k;

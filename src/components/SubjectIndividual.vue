@@ -1,44 +1,30 @@
 <template>
   <div class="commentContainer">
-    <div class="card" v-for="comment in reportComments" :key="comment.id">
-      <!-- <div class="card-image"> -->
-      <!-- <figure class="image is-4by3">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-        </figure>-->
-      <!-- </div> -->
-      <header class="card-header">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img
-                class="kaitiaki-pic"
-                v-bind:src="
-                  require('@/assets/staff_photos/' +
-                    formatTeacherName(comment.teacher) +
-                    '.jpg')
-                "
-              />
-            </figure>
-          </div>
-          <div class="media-center">
-            <p class="title role">{{ comment.subject }}</p>
-          </div>
-          <div class="media-right">
-            <p class="subtitle teacher">{{ comment.teacher }}</p>
-          </div>
-        </div>
-      </header>
-      <div class="card-content">
-        <div class="content reports">{{ comment.reportComment }}</div>
+    <div v-for="comment in subjectComments" :key="comment.id">
+      <div>
 
         <div
-          v-if="
-            !fitness && filterSubjectStandards(comment.subject).length !== 0
-          "
+          v-if="filterSubjectStandards(comment.subject).length !== 0"
           class="card-content contentStandards"
         >
-          <div class="content content5050">
-            <div class="table">
+
+        <h2 class="student-name">{{ student.given_name }}</h2>
+
+        <v-row no-gutters>
+
+            <v-col cols="1" class="justify-center align-center">
+                <img
+                  id="profile-pic"
+                  v-bind:src="
+                    require('@/assets/taiohiIdPhotos/' +
+                      formatStudentName(student.given_name) +
+                      '.png')
+                  "
+                />
+                <p class="nsn">{{student.nsn}}</p>
+            </v-col>
+
+            <v-col class="table justify-center align-center" cols="4">
               <table>
                 <!-- credit table titles -->
                 <thead>
@@ -85,12 +71,19 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </v-col>
+
             <!-- Pie Chart.js -->
-            <div class="pie">
+            <v-col class="pie justify-center align-center" cols="2">
               <SubjectPiechart :student="student" :subject="comment.subject" />
-            </div>
-          </div>
+            </v-col>
+
+            <v-col cols="5" class="justify-center align-center">
+              <div class="reports">{{comment.reportComment}}</div>
+            </v-col>
+
+          </v-row>
+
         </div>
       </div>
     </div>
@@ -109,11 +102,11 @@ Vue.use(firestorePlugin);
 import SubjectPiechart from "./SubjectPiechart.vue";
 
 export default {
-  name: "IndividualComment",
+  name: "SubjectIndividual",
   components: {
     SubjectPiechart
   },
-  props: ["student", "reportComments", "standards", "fitness"],
+  props: ["student", "subjectComments", "standards"],
   data() {
     return {
       // standards: [],
@@ -132,14 +125,6 @@ export default {
     //   "reportComments",
     //   db.collection(`/students/${this.student.id}/reportComments`)
     // );
-    // this.$bind(
-    //   "standardsRuakura",
-    //   db.collection(`/studentsRuakura/${this.student.id}/openCredits`)
-    // );
-    // this.$bind(
-    //   "reportCommentsRuakura",
-    //   db.collection(`/studentsRuakura/${this.student.id}/reportComments`)
-    // );
   },
   methods: {
     filterSubjectStandards: function(subjectName) {
@@ -148,15 +133,13 @@ export default {
       });
       //order the standards by this custom order
       var completedOrder = [
-        "In Moderation",
+        "Not Submitted",
+        "Not Achieved",
         "Achieved",
         "Merit",
         "Excellence",
         "Current",
-        "Upcoming",
-        "External",
-        "Not Submitted",
-        "Not Achieved"
+        "Upcoming"
       ];
       return subStandards.sort(function(a, b) {
         if (a.completed == b.completed) return a.completed - b.completed;
@@ -232,12 +215,17 @@ export default {
       });
       console.log("subject comment:", subjectComment);
       return subjectComment[0].reportComment;
+    },
+    formatStudentName: function(name) {
+      var name = name.replace(/\s/g, "");
+      return name.toLowerCase();
     }
   }
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
 .commentContainer {
   display: flex;
   flex-wrap: wrap;
@@ -275,8 +263,9 @@ th {
 }
 
 .reports {
-  margin-bottom: 20px;
+  margin: 20px;
   text-align: justify;
+  font-size: 12px;
 }
 
 .media {
@@ -325,6 +314,15 @@ th {
 .content5050 {
   display: flex;
   margin-bottom: 10px;
+  width: 50%;
+}
+
+.col25 {
+  width: 25%;
+}
+
+.col50 {
+  width:50%;
 }
 
 .table {
@@ -337,7 +335,6 @@ table {
 }
 
 .pie {
-  width: 30%;
   display: flex;
   align-items: center;
 }
@@ -418,5 +415,23 @@ table {
   background-color: #ff3860;
   color: white;
   font-size: 0.5rem !important;
+}
+
+#profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #777777;
+}
+
+.student-name {
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.nsn {
+  font-size: 9px;
 }
 </style>

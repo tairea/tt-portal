@@ -135,8 +135,8 @@
 <style lang="scss" scoped>
     /* scoping not working on reveal css imports */
 
-    @import url('../../node_modules/reveal.js/dist/reveal.scss');
-    @import url('../../node_modules/reveal.js/dist/theme/white.scss');
+    /* @import url('../../node_modules/reveal.js/dist/reveal.scss');
+    @import url('../../node_modules/reveal.js/dist/theme/white.scss'); */
 
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;

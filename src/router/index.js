@@ -10,6 +10,8 @@ import JuniorITLPA4 from '@/components/JuniorITLPA4'
 import DashboardA4Ruakura from '@/components/DashboardA4Ruakura'
 import AcademicBoard from '@/components/AcademicBoard'
 import Timetable from '@/components/Timetable'
+import ChooseSubject from '@/components/ChooseSubject'
+import BySubject from '@/components/BySubject'
 
 import firebase from 'firebase'
 
@@ -28,8 +30,8 @@ let router = new Router({
     },
     {
       path: '/dashboard',
-      name: 'dashboardOverview',
-      component: DashboardOverview,
+      name: 'teacherOverview',
+      component: TeacherDashboard,
       meta: {
         requiresAuth: true
       }
@@ -55,6 +57,22 @@ let router = new Router({
       path: '/itlp',
       name: 'itlp',
       component: JuniorITLPA4,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/chooseSubject',
+      name: 'chooseSubject',
+      component: ChooseSubject,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/subject',
+      name: 'subject',
+      component: BySubject,
       meta: {
         requiresAuth: true
       }

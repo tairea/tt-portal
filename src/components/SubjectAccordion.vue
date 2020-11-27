@@ -163,7 +163,7 @@
         });
       },
       formatTeacherName: function (name) {
-        console.log("trying to split:", name)
+        // console.log("trying to split:", name)
         let teacherName = name.split(" ")
         if (teacherName.length ==  1) {
           return teacherName[0].toLowerCase()

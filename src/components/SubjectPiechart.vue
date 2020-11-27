@@ -34,7 +34,7 @@ export default {
     // get standards from firebase
     this.$bind(
       "standards",
-      db.collection(`/students/${this.student.id}/openCredits`)
+      db.collection(`/students/${this.student.id}/openCredits2020`)
     );
     this.studentName = this.student.given_name;
     this.subjectName = this.subject;
@@ -73,18 +73,41 @@ export default {
           datasets: [
             {
               data: [
-                this.getTotal("Upcoming"),
-                this.getTotal("Current"),
-                this.getTotal("Achieved") +
-                  this.getTotal("Merit") +
-                  this.getTotal("Excellence"),
-                this.getTotal("Not Achieved") + this.getTotal("Not Submitted")
+                this.getTotal("Upcoming"),      // 1
+                this.getTotal("External"),      // 2
+                this.getTotal("Current"),       // 3
+                this.getTotal("In Moderation"), // 4
+                this.getTotal("Achieved"),      // 5
+                  this.getTotal("Merit"),       // 6
+                  this.getTotal("Excellence"),  // 7
+                this.getTotal("Not Achieved"),  // 8
+                this.getTotal("Not Submitted")  // 9
               ],
-              backgroundColor: ["#209cee", "#ffdc57", "#23d160", "#ff3860"],
+              backgroundColor: [
+                "lightgrey", // 1
+                "#0E78BE", // 2
+                "#ffdc57", // 3
+                "#FFCE0A", // 4
+                "#23d160", // 5
+                "#209cee",// 6
+                "#7957d5",// 7
+                "#ff3860", // 8
+                "grey"      // 9
+              ],
               label: "Dataset 1"
             }
           ],
-          labels: ["Upcoming", "Current", "Achieved", "Not Achieved"]
+          labels: [
+            "Upcoming",       // 1
+            "External",       // 2
+            "Current",        // 3
+            "In Moderation",  // 4
+            "Achieved",       // 5
+            "Merit",          // 6
+            "Excellence",     // 7
+            "Not Achieved",   // 8
+            "Not Submitted"   // 9
+          ]
         },
         options: {
           responsive: true,

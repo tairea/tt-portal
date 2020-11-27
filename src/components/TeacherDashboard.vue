@@ -1,14 +1,46 @@
 <template>
   <div id="dashboard">
-    <h1>DASHBOARD</h1>
+    <!-- <h1>DASHBOARD</h1> -->
     <div class="flex-container">
-      <div class="flex-box box-1">NOTICES</div>
-      <div class="flex-box box-2">VIEW STUDENTS</div>
-      <div class="flex-box box-3">VIEW CLASSES</div>
-      <div class="flex-box box-4">FOUR</div>
-      <div class="flex-box box-5">FIVE</div>
-      <div class="flex-box box-6">SIX</div>
+      
+      <div class="flex-box">
+        <router-link to="/teacher" target= '_blank'>
+          <div class="box-1">
+            <img class="cardImage" v-bind:src="require('@/assets/thumb-overview.jpg')" />
+            <p class="cardTitle">ALL STUDENTS OVERVIEW</p>
+          </div>
+        </router-link>
+      </div>
+
+      <div class="flex-box">
+        <router-link to="/chooseSubject" target= '_blank'>
+          <div class="box-1">
+            <img class="cardImage" v-bind:src="require('@/assets/thumb-bySubject.png')" />
+            <p class="cardTitle">VIEW BY SUBJECT</p>
+          </div>
+        </router-link>
+      </div>
+
+      <div class="flex-box">
+        <router-link to="/ab" target= '_blank'>
+          <div class="box-2">
+            <img class="cardImage" v-bind:src="require('@/assets/thumb-academicBoard.jpg')" />
+            <p class="cardTitle">SENIORS ACADEMIC BOARD</p>
+          </div>
+        </router-link>
+      </div>
+      
+      <div class="flex-box">
+        <router-link to="/reports" target= '_blank'>
+          <div class="box-3">
+            <img class="cardImage" v-bind:src="require('@/assets/thumb-reports.jpg')" />
+            <p class="cardTitle">REPORTS</p>
+          </div>
+        </router-link>
+      </div>
+    
     </div>
+
   </div>
 </template>
 
@@ -21,57 +53,24 @@ import firebase from "firebase";
 Vue.use(Buefy);
 
 import { studentsDb } from "./firebaseInit";
+
 import Navbar from "./Navbar.vue";
-import ProfileDetails from "./ProfileDetails.vue";
-import ProfileITLP from "./ProfileITLP.vue";
-import ProfileFitness from "./ProfileFitness.vue";
-import ProfileComments from "./ProfileComments.vue";
-// import ProfileCommentsRuakura from "./ProfileCommentsRuakura.vue";
-import ProfileCurrentWork from "./ProfileCurrentWork.vue";
-import ProfileOverviewWork from "./ProfileOverviewWork.vue";
+
 
 export default {
   name: "TeacherDashboard",
   components: {
     Navbar,
-    ProfileDetails,
-    ProfileITLP,
-    ProfileFitness,
-    ProfileComments,
-    ProfileCurrentWork,
-    ProfileOverviewWork
+
   },
   data() {
     return {
       currentUser: null,
-      students: [],
-      // student: null,
-      loadedStudents: false
+
     };
   },
   methods: {
-    logout: function() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          alert("signed out");
-          this.$router.go({ path: this.$router.path });
-        });
-    }
-  },
-  watch: {
-    currentUser(user) {
-      this.$bind(
-        "students",
-        studentsDb.where("email", "array-contains", user.email)
-        // studentsDb.orderBy("school_year")
-      );
-    },
-    students(students) {
-      console.log("user has access to:", students);
-      this.$set(this, "loadedStudents", true);
-    }
+
   },
   mounted() {
     this.$set(this, "currentUser", firebase.auth().currentUser);
@@ -81,59 +80,57 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  /* margin-top: 60px; */
-}
-
-#dashboard {
-  background-color: white;
-}
-
-.margin-5 {
-  margin: 5px 0px;
-}
-.margin-20 {
-  margin: 20px 0px;
-}
-
-.profileCurrent,
-.profileFinished,
-.profileFitness {
-  margin-bottom: 50px;
-}
-
-.flexCenter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-}
-
-hr {
-  margin: 50px 0px;
-}
-
-/* If viewed on computer */
-.profileDetails {
-    width: 100%;
+<style scoped>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  .profileWork {
-    width: 30%;
+  #dashboard {
+    height: 100vh;
+    width: 100vw;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-  .profileCurrent {width: 100%;}
-  .profileCompleted {width: 100%;}
 
-  .profileFinished {width: 30%;}
-  .profileFitness {width: 30%;}
+  .flex-container {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flex-box {
+    width: 20%;
+    /* height: 150px; */
+    padding: 25px;
+    margin: 20px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 10px;
+    transition: all 0.1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+   
+  }
+
+  .cardTitle {
+    margin-top: 40px;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .flex-box:hover {
+    box-shadow: 2px 3px 3px 3px lightgrey;
+  }
+
+  .cardImage {
+    width: 100%;
+    object-fit: cover;
+  }
 </style>

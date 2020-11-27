@@ -52,17 +52,19 @@ export default {
   },
   methods: {
     getTotal(status) {
-      const standardsByStatus = this.standards.filter(
-        stnd => stnd.completed == status
-      );
+      if (this.standards) {
+        const standardsByStatus = this.standards.filter(
+          stnd => stnd.completed == status
+        );
 
-      const total = standardsByStatus.reduce(
-        (prev /* number */, curr /* standard */) =>
-          Number(prev) + Number(curr.assessmentCredits),
-        0
-      );
+        const total = standardsByStatus.reduce(
+          (prev /* number */, curr /* standard */) =>
+            Number(prev) + Number(curr.assessmentCredits),
+          0
+        );
 
-      return total;
+        return total;
+      }
     },
     loadChart() {
       // console.log("loading chart...");

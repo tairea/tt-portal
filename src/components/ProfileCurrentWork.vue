@@ -117,8 +117,8 @@ Science
         //filter by current
         var currentStands = this.standards.filter(x => x.completed === "Current");
         // log test
-        console.log("current standards for ",this.student.given_name)
-        console.log(this.currentStands)
+        // console.log("current standards for ",this.student.given_name)
+        // console.log(this.currentStands)
         //sort by dueDate
         return currentStands.sort((a, b) =>
           a.dueDate > b.dueDate ? 1 : b.dueDate > a.dueDate ? -1 : 0
@@ -158,7 +158,7 @@ Science
         return day + " " + months[month];
       },
       formatTeacherName: function (name) {
-        console.log("trying to split:", name)
+        // console.log("trying to split:", name)
         let teacherName = name.split(" ")
         if (teacherName.length ==  1) {
           return teacherName[0].toLowerCase()

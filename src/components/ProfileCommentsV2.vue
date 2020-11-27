@@ -12,7 +12,7 @@
     <IndividualComment v-else-if="thirdPage == true" :student="student" :reportComments="reportComments.slice(4,6)" :standards="standards" />
 
     <!-- FOURTH PAGE TUTOA -->
-    <IndividualComment v-else-if="thirdPage == true" :student="student" :reportComments="reportComments.slice(6,report.length)" :standards="standards" />
+    <IndividualComment v-else-if="fourthPage == true" :student="student" :reportComments="reportComments.slice(6,reportComments.length)" :standards="standards" />
   </div>
 </template>
 
@@ -49,6 +49,7 @@ export default {
       "reportComments",
       db.collection(`/students/${this.student.id}/reportComments2020`)
     ).then(() => {
+          // splice out f&c. as is shown on its own page.
           for (var i = this.reportComments.length - 1; i >= 0; --i) {
           if (this.reportComments[i].id == "Fitness & Conditioning") {
               this.reportComments.splice(i,1);

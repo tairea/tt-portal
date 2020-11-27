@@ -29,7 +29,7 @@
 
     	  <!-- EOY REPORT 2019 -->
         <div class="report" style="margin-top: 60px;">
-          <h2 v-if="a4"  style="font-weight: bold;">Mid-year Report<br><span style="font-size: 1.5em;">2020</span></h2>
+          <h2 v-if="a4"  style="font-weight: bold;">End of Year Report<br><span style="font-size: 1.5em;">2020</span></h2>
         </div>
 
       </div>
@@ -49,9 +49,9 @@
               class="creditTotal"
             >
             <div v-if="getTotal !== 0 || student.creditTotal !== 0">
-              <!-- {{student.creditTotal}} -->
+              {{student.creditTotal}}
               <!-- {{ getTotal() }} -->
-              {{ getTotal() > student.creditTotal ? getTotal() : student.creditTotal }}
+              <!-- {{ getTotal() > student.creditTotal ? getTotal() : student.creditTotal }} -->
               
               <!-- CREDITS -->
               <h2 v-if="a4 && student.school_year >= 11 && overview" class="credits" style="font-size: 0.5em; ">
@@ -129,7 +129,7 @@ export default {
   },
   methods: {
     getTotal() {
-      console.log("getting total")
+      // console.log("getting total")
       //=== achieved credits
       const achievedCredits = this.standards.filter(
         stnd => stnd.completed == "Achieved"
@@ -358,8 +358,8 @@ font-family: 'Caudex', serif;
 }
 
 #profile-pic {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
 
   /* border-radius: 50%;
   object-fit: cover;
