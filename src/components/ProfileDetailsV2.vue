@@ -37,7 +37,7 @@
 		
 		<!-- GAINED -->
         <div class="ncea" style="margin-top: 30px;">
-        	<p v-if="student.school_year >= 11 && overview" :class="{subtitle: a4}"  style=" " ><strong style="color: white;">NCEA Level {{student.school_year % 10}}</strong></p>
+        	<p v-if="student.school_year >= 11 && overview" :class="{subtitle: a4}"  style=" " ><strong style="color: white;">{{student.creditTotal >= 80 ? "Passed " : ""}} NCEA Level {{student.school_year % 10}} {{student.creditTotal >= 80 ? " with" : ""}}</strong></p>
         	<!-- CREDIT # -->
 			<!-- <h2
               v-if="student.school_year >= 11 && overview && ruakura"

@@ -8,14 +8,14 @@
         <!-- <ProfileComments :student="student"/> -->
         <div v-if="isDesktop()" class="container profileWork">
           <ProfileCurrentWork :student="student" class="profileCurrent" />
-          <ProfileCompletedWork :student="student" class="profileCompleted" />
+          <!-- <ProfileCompletedWork :student="student" class="profileCompleted" /> -->
         </div>
         <div v-else>
-          <ProfileCurrentWork :student="student" class="profileCurrent" />
-          <ProfileCompletedWork :student="student" class="profileCompleted" />
+          <ProfileCurrentWork :student="student" class="profileCurrent pt-6" />
+          <!-- <ProfileCompletedWork :student="student" class="profileCompleted" /> -->
         </div>
-        <ProfileOverviewWork :student="student" class="profileFinished" />
-        <ProfileFitness :student="student" class="profileFitness" />
+        <!-- <ProfileOverviewWork :student="student" class="profileFinished" /> -->
+        <!-- <ProfileFitness :student="student" class="profileFitness" /> -->
         <hr />
       </div>
     </div>
@@ -38,11 +38,12 @@
 
 <script>
 import Vue from "vue";
-import Buefy from "buefy";
-import "buefy/dist/buefy.css";
 import firebase from "firebase";
 
-Vue.use(Buefy);
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
+
+Vue.use(Buefy)
 
 import { studentsDb } from "./firebaseInit";
 import Navbar from "./Navbar.vue";

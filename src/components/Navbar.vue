@@ -21,8 +21,7 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item">Signed in as:</a>
-        <a class="navbar-item">{{currentUser}}</a>
+        <p class="navbar-item" style="color: slategrey">Signed in as: {{currentUser}}</p>
       </div>
 
       <div class="navbar-end">

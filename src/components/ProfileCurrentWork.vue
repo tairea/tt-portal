@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="columns is-mobile">
-      <div class="column">
+      <div class="column" style="margin: 10px;">
         <h2 class="title is-6 has-text-centered" :style="overview ? 'font-size:0.7em':''">CURRENT WORK</h2>
         <!-- <table v-bind:class="[{ tableOverview: overview }, table]"> -->
         <table v-bind:class="[overview ? 'tableOverview' : 'table']">
@@ -47,6 +47,7 @@ Science
                 <span v-if="standard.subject == 'STEM'" class="tag is-sci is-normal">STEM</span>
                 <span v-if="standard.subject == 'Mathematics'" class="tag is-math is-norpmal">MATH</span>
                 <span v-if="standard.subject == 'Kaupapa Māori'" class="tag is-tika is-normal">MAOR</span>
+                <span v-if="standard.subject == 'Te Reo Māori'" class="tag is-tika is-normal">MAOR</span>
                 <span v-if="standard.subject == 'MPA'" class="tag is-tika is-normal">MPA</span>
                 <span v-if="standard.subject == 'Physical Education'" class="tag is-pe is-normal">PE</span>
                 <span v-if="standard.subject == 'Physical Education & Health'" class="tag is-pe is-normal">PE&H</span>
@@ -102,7 +103,7 @@ Science
     mounted() {
       this.$bind(
         "standards",
-        db.collection(`/students/${this.student.id}/openCredits2020`)
+        db.collection(`/students/${this.student.id}/openCredits2021`)
       );
       // console.log("this.standards");
       // console.log(this.standards);
