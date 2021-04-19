@@ -88,13 +88,13 @@
 
       this.$bind(
         "standards",
-        db.collection(`/students/${this.student.id}/openCredits2020`)
+        db.collection(`/students/${this.student.id}/openCredits2021`)
       );
       // console.log("standards in accordian");
       // console.log(this.standards);
       this.$bind(
         "reportComments",
-        db.collection(`/students/${this.student.id}/reportComments2020`)
+        db.collection(`/students/${this.student.id}/reportComments2021`)
       );
     },
     computed: {

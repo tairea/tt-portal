@@ -15,11 +15,7 @@
             <v-col cols="1" class="justify-center align-center">
                 <img
                   id="profile-pic"
-                  v-bind:src="
-                    require('@/assets/taiohiIdPhotos/' +
-                      formatStudentName(student.given_name) +
-                      '.png')
-                  "
+                  v-bind:src="taiohiPic"
                 />
                 <p class="nsn">{{student.nsn}}</p>
             </v-col>
@@ -93,7 +89,7 @@
 <script>
 import Vue from "vue";
 
-import { db } from "./firebaseInit";
+import { db, storage } from "./firebaseInit";
 import Chart from "chart.js";
 import "chartjs-plugin-labels";
 import { firestorePlugin } from "vuefire";
@@ -113,6 +109,7 @@ export default {
       // reportComments: [],
       // standardsRuakura: [],
       // reportCommentsRuakura: [],
+      taiohiPic: "",
     };
   },
   firestore: {},
@@ -125,8 +122,27 @@ export default {
     //   "reportComments",
     //   db.collection(`/students/${this.student.id}/reportComments`)
     // );
+    this.getPicLink();
   },
   methods: {
+     async getPicLink() {
+      console.log(
+        "getting image for:",
+        this.student.given_name,
+        this.student.nsn
+      );
+      var picUrl = await storage
+        .ref("taiohi2021/" + this.student.nsn + ".png")
+        .getDownloadURL()
+        .then(function(url) {
+          console.log("got pic url:", url);
+          return url;
+        })
+        .catch((err) => {
+          console.log("error: " + err.message);
+        });
+      this.taiohiPic = picUrl;
+    },
     filterSubjectStandards: function(subjectName) {
       var subStandards = this.standards.filter(sub => {
         return sub.subject == subjectName;

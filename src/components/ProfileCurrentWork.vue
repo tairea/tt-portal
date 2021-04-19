@@ -46,6 +46,7 @@ Science
                 <span v-if="standard.subject == 'Biology'" class="tag is-sci is-normal">BIO</span>
                 <span v-if="standard.subject == 'STEM'" class="tag is-sci is-normal">STEM</span>
                 <span v-if="standard.subject == 'Mathematics'" class="tag is-math is-norpmal">MATH</span>
+                <span v-if="standard.subject == 'Maths'" class="tag is-math is-norpmal">MATH</span>
                 <span v-if="standard.subject == 'Kaupapa Māori'" class="tag is-tika is-normal">MAOR</span>
                 <span v-if="standard.subject == 'Te Reo Māori'" class="tag is-tika is-normal">MAOR</span>
                 <span v-if="standard.subject == 'MPA'" class="tag is-tika is-normal">MPA</span>

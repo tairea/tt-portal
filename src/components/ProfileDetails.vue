@@ -20,6 +20,9 @@
           <p :class="{ subtitle: a4 }" style="font-weight: bold">
             Year {{ student.school_year }}
           </p>
+          <p :class="{ subtitle: a4 }" style="font-size: 0.7rem">
+            NSN {{ student.nsn }}
+          </p>
         </div>
         <!-- CREDITS -->
         <h2
@@ -45,11 +48,6 @@
     </div>
     <div v-else class="columns is-mobile margin-5">
       <div class="column">
-        <!-- <img
-          v-if="ruakura"
-          id="profile-pic"
-          v-bind:src="require('@/assets/student_photos/ruakura/' + formatStudentName(student.given_name) + '.png')"
-        /> -->
         <img id="profile-pic" :src="taiohiPic" />
       </div>
       <div class="column has-text-left-mobile">

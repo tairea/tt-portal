@@ -14,9 +14,6 @@
       <!-- PROFILE PIC -->
       <div class="column profileContainer">
         
-        <!-- <img id="profile-pic" v-bind:src="require('@/assets/student_photos/' + formatStudentName(student.given_name) + '.png')" /> -->
-        <!-- high quality folder  -->
-        <img id="profile-pic" v-bind:src="require('@/assets/taiohiIdPhotos/' + formatStudentName(student.given_name) + '.png')" />
       </div>
 
       
@@ -78,15 +75,6 @@
 	<!-- V-ELSE -->
     <div v-else class="columns is-mobile margin-5">
       <div class="column">
-        <!-- <img
-          v-if="ruakura"
-          id="profile-pic"
-          v-bind:src="require('@/assets/student_photos/ruakura/' + formatStudentName(student.given_name) + '.png')"
-        /> -->
-        <img
-          id="profile-pic"
-          v-bind:src="require('@/assets/student_photos/' + formatStudentName(student.given_name) + '.png')"
-        />
       </div>
       <div class="column has-text-left-mobile">
         <p class="has-text-weight-semibold">{{student.given_name}} {{student.family_name}}</p>

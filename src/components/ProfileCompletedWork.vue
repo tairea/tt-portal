@@ -123,7 +123,7 @@ Science
     mounted() {
       this.$bind(
         "standards",
-        db.collection(`/students/${this.student.id}/openCredits2020`)
+        db.collection(`/students/${this.student.id}/openCredits2021`)
       );
     },
     methods: {
