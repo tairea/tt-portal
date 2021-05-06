@@ -20,7 +20,7 @@
 
         <!-- Subject Pies -->
         <div class="subjectsContainer">
-            <div v-for="subject in getSubjects" class="subjectsCol">
+            <div v-for="subject in getSubjects" class="subjectsCol" :key="subject.id">
                 <div class="subjectPie">
                     <PieChart
                         :subjectName="subject"
@@ -28,6 +28,7 @@
                         :standards="subjectStandards(subject)" 
                         :height="40"
                         :width="40"
+                        :labels="true"
                     />
                 </div>
                 <div class="subjectLabel">
@@ -82,7 +83,7 @@
         mounted() {
             this.getNormalProfilePic(this.student.given_name)
             // get standards from firebase
-            this.$bind( "standards", db.collection(`/students/${this.student.id}/openCredits2020`) );
+            this.$bind( "standards", db.collection(`/students/${this.student.id}/openCredits2021`) );
 
             this.studentName = this.student.given_name;
         },
@@ -90,7 +91,7 @@
             getSubjects() {
                 if (this.standards) {
                     this.subjects = [...new Set(this.standards.map(x => x.subject))]
-                    console.log(this.subjects)
+                    console.log("this.subjects:",this.subjects)
                     return this.subjects
                 }
             },
@@ -101,6 +102,7 @@
                 const subjectStandards = this.standards.filter(
                     stnd => stnd.subject == subject
                 );
+                console.log("subjectStandards:for:"+subject+"for"+this.studentName+"=",subjectStandards)
                 return subjectStandards;
             },
             getNormalProfilePic(name) {

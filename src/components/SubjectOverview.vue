@@ -31,11 +31,11 @@ export default {
   mounted() {
     this.$bind(
       "standards",
-      db.collection(`/students/${this.student.id}/openCredits2020`)
+      db.collection(`/students/${this.student.id}/openCredits2021`)
     );
     this.$bind(
       "subjectComments",
-      db.collection(`/students/${this.student.id}/reportComments2020`).where("subject", "==", this.subject )
+      db.collection(`/students/${this.student.id}/reportComments2021`).where("subject", "==", this.subject )
     ).then(() => {})
   },
   methods: {

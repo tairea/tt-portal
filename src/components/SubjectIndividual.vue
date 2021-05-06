@@ -12,6 +12,7 @@
 
         <v-row no-gutters>
 
+            <!-- Profile Pic -->
             <v-col cols="1" class="justify-center align-center">
                 <img
                   id="profile-pic"

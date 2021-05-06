@@ -25,9 +25,9 @@
           </p>
         </div>
         <!-- CREDITS -->
-        <h2
+        <!-- <h2
           v-if="
-            student.school_year >= 11 &&
+            student.school_year >= 11 &&run 
               overview &&
               student.creditTotal !== null &&
               student.creditTotal > 0
@@ -40,7 +40,7 @@
           Total Credits
           <br />
           <br />
-        </h2>
+        </h2> -->
 
         <!-- Report Name -->
         <h2 v-if="a4" class="report">Term 2 Report 2019</h2>

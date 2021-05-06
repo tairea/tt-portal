@@ -23,11 +23,11 @@
             }
         },
         mounted() {
-            console.log("============ pie mounted")
+            // console.log("============ pie mounted")
 
-            console.log("student:",this.studentName)
-            console.log("standards:",this.standards)
-            console.log("subject:",this.subjectName)
+            // console.log("student:",this.studentName)
+            // console.log("standards:",this.standards)
+            // console.log("subject:",this.subjectName)
             // get standards from firebase (standards data now propped in)
             // this.$bind( "standards", db.collection(`/students/${this.student.id}/openCredits2020`) );
 
@@ -46,7 +46,7 @@
             },
             // chart methods
             getTotal(status) {
-                console.log("getting total")
+                // console.log("getting total")
                 
                     const standardsByStatus = this.standards.filter(
                         stnd => stnd.completed == status
@@ -58,13 +58,13 @@
                         0
                     );
 
-                    console.log("total:",total)
+                    // console.log("total:",total)
                     return total;
                 
             },
             loadChart() {
                 // console.log("loading chart...");
-                console.log(this.subjectName)
+                // console.log(this.subjectName)
 
                 if (!this.subjectName) {
                     var ctx = document.getElementById(this.studentName + "Chart");

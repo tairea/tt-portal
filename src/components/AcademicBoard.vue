@@ -130,13 +130,17 @@
 </script>
 
 
-<!-- <style scoped src="../../node_modules/reveal.js/dist/reveal.css"></style>
-<style scoped src="../../node_modules/reveal.js/dist/theme/white.css"></style> -->
+<style scoped src="../../node_modules/reveal.js/dist/reveal.css"></style>
+<style scoped src="../../node_modules/reveal.js/dist/theme/white.css"></style>
+
 <style lang="scss" scoped>
     /* scoping not working on reveal css imports */
 
-    /* @import url('../../node_modules/reveal.js/dist/reveal.scss');
-    @import url('../../node_modules/reveal.js/dist/theme/white.scss'); */
+    // @import url('../../node_modules/reveal.js/dist/reveal.scss');
+    // @import url('../../node_modules/reveal.js/dist/theme/white.scss');
+    
+    // @import url('../node_modules/reveal.js/css/reveal.css');
+    // @import url('../node_modules/reveal.js/css/theme/white.css');
 
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -146,6 +150,7 @@
         color: #2c3e50;
         /* margin-top: 60px; */
         height: 100vh;
+        background-color: white !important;
     }
 
     .reveal .slides>section {
