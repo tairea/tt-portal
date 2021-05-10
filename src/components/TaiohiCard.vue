@@ -3,10 +3,12 @@
         <!-- <v-card-title class="headline">{{student.given_name}}</v-card-title> -->
 
         <!-- PHOTO -->
-        <img :src="photo" class="profilePic">
+        <!-- <img :src="photo" class="profilePic"> -->
+        <div class="profileNumber">{{getTaiohiSecretNumber(student.nsn)}}</div>
+        <!-- <div class="profileNumber">{{student.given_name}}</div> -->
 
         <!-- CREDIT TOTAL -->
-        <div class="creditTotal">{{student.creditTotal}}</div>
+        <!-- <div class="creditTotal">{{student.creditTotal}}</div> -->
 
         <!-- PIE CHART -->
         <PieChart
@@ -26,8 +28,8 @@
                         :subjectName="subject"
                         :studentName="student.given_name"
                         :standards="subjectStandards(subject)" 
-                        :height="40"
-                        :width="40"
+                        :height="60"
+                        :width="60"
                         :labels="true"
                     />
                 </div>
@@ -125,6 +127,10 @@
 
                 return total;
             },
+            getTaiohiSecretNumber(nsn) {
+                nsn = String(nsn).substr(-3)
+                return nsn
+            }
         }
     }
 </script>
@@ -156,6 +162,22 @@
         margin-left: 10px;
     }
 
+    .profileNumber {
+        /* border: 1px solid rgba(0,0,0,0.05); */
+        background-color: rgb(132, 136, 141);
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        box-shadow: none;
+        margin-left: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Chango', cursive;
+        font-size: 20px;
+        color: white;
+    }
+
     .creditTotal {
         width: 100px;
         height: 100px;
@@ -180,13 +202,14 @@
         display: flex;
         flex-wrap: wrap;
         height: 100%;
-        justify-content: center;
+        justify-content: left;
         align-items: center;
+        flex: 1;
     }
 
     .subjectsCol{
-        width: 50px;
-        height: 50px;
+        // width: 50px;
+        // height: 50px;
         margin: 0 5px;
         display: flex;
         flex-direction: column;

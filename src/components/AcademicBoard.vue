@@ -121,9 +121,10 @@
             },
             getSortStudents(year) {
                 let studentsByYear = this.students.filter(student => student.school_year == year);
-                // let studentsByYear = this.students.filter(student => student.nsn == '137431392');
+                // let studentsByYear = this.students.filter(student => student.nsn == '131547578');
                 let descending = studentsByYear.sort((a, b) => Number(b.creditTotal) - Number(a.creditTotal));
                 return descending
+                // return studentsByYear
             }
         }
     }

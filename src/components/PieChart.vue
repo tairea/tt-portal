@@ -117,8 +117,9 @@
                         labels: {
                             render: "value",
                             fontColor: "#fff",
-                            position: "border"
-                            // outsidePadding: 4
+                            position: "default",
+                            outsidePadding: 4,
+                            fontSize: 16,
                         }
                     }
                 }
