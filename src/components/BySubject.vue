@@ -78,7 +78,7 @@ export default {
       const yearGroup = this.students.filter(
         student => student.school_year == yearlevel
       );
-      console.log("yearlevel:",yearlevel,"is:",yearGroup)
+      // console.log("yearlevel:",yearlevel,"is:",yearGroup)
       return yearGroup;
     }
   },
@@ -88,10 +88,10 @@ export default {
         "students",
         //  studentsDb.where("email", "array-contains", user.email)
         // studentsDb.orderBy("school_year") //LOADS ALL STUDENTS
-        // studentsDb.where("school_year", ">=", 11 ) //LOAD SENIORS
+        studentsDb.where("school_year", ">=", 11 ) //LOAD SENIORS
         // studentsDb.where("school_year", ">=", 13) //LOAD SENIORS
         // studentsDb.where("school_year", "<", 11 ) //LOADS JUNIORS
-        studentsDb.where("nsn", "==", 134316380 ) //LOAD by NSN
+        // studentsDb.where("nsn", "==", 134316380 ) //LOAD by NSN
       );
     },
     students(students) {

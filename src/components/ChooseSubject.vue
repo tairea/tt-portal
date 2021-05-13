@@ -2,7 +2,7 @@
   <div id="dashboard">
     <!-- <h1>DASHBOARD</h1> -->
     <div class="flex-container">
-      <div v-for="sub in allSubjects" class="flex-box">
+      <div v-for="sub in allSubjects" class="flex-box" :key="sub.id">
         <router-link
           :to="{ name: 'subject', params: { subject: sub } }"
         >
@@ -34,23 +34,16 @@ export default {
     return {
       currentUser: null,
       allSubjects: [
-        "Innovation",
-        "English",
-        "Work Ready",
         "Science",
-        "Chemistry",
-        "Physics",
-        "Biology",
-        "STEM",
+        "English",       
         "Mathematics",
-        "Kaupapa Māori",
-        "Te Reo Māori",
-        "MPA",
+        "Innovation",
         "Physical Education",
-        "Physical Education & Health",
-        "Project Based Learning",
+        "Te Reo Māori",
+        "Te Reo Rangatira",
         "Dance",
-        "Financial Literacy"
+        "Financial Literacy",
+        "Work Ready",
       ]
     };
   },

@@ -119,7 +119,7 @@
                             fontColor: "#fff",
                             position: "default",
                             outsidePadding: 4,
-                            fontSize: 16,
+                            fontSize: 15,
                         }
                     }
                 }
@@ -144,7 +144,7 @@
         border-radius: 10px;
         /* background-color: hsl(141, 71%, 48%); */
         background-color: rgba(0,0,0,0.05);
-        height: 100px;
+        height: 80px;
         width: calc(50% - 20px);
     }
 

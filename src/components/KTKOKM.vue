@@ -146,11 +146,11 @@
             // get standards from firebase
             this.$bind(
                 "standards",
-                db.collection(`/students/${this.student.id}/openCredits2020`)
+                db.collection(`/students/${this.student.id}/openCredits2021`)
             );
             this.$bind(
                 "itlp",
-                db.collection(`students/${this.student.id}/itlp2020`)) // Load ITLP
+                db.collection(`students/${this.student.id}/itlp2021`)) // Load ITLP
             // this.$bind(
             //   "standardsRuakura",
             //   db.collection(`/studentsRuakura/${this.student.id}/openCredits2020`)

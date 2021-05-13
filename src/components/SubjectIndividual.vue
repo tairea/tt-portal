@@ -18,6 +18,7 @@
                   id="profile-pic"
                   v-bind:src="taiohiPic"
                 />
+                <!-- <p class="">{{student.given_name}}</p> -->
                 <p class="nsn">{{student.nsn}}</p>
             </v-col>
 
@@ -123,15 +124,16 @@ export default {
     //   "reportComments",
     //   db.collection(`/students/${this.student.id}/reportComments`)
     // );
+    //====== GET PROFILE PIC =====
     this.getPicLink();
   },
   methods: {
      async getPicLink() {
-      console.log(
-        "getting image for:",
-        this.student.given_name,
-        this.student.nsn
-      );
+      // console.log(
+      //   "getting image for:",
+      //   this.student.given_name,
+      //   this.student.nsn
+      // );
       var picUrl = await storage
         .ref("taiohi2021/" + this.student.nsn + ".png")
         .getDownloadURL()
@@ -166,30 +168,30 @@ export default {
         );
       });
     },
-    filterSubjectStandardsRuakura: function(subjectName) {
-      var subStandards = this.standardsRuakura.filter(sub => {
-        return sub.subject == subjectName;
-      });
-      //order the standards by this custom order
-      var completedOrder = [
-        "In Moderation",
-        "Achieved",
-        "Merit",
-        "Excellence",
-        "Current",
-        "Upcoming",
-        "External",
-        "Not Submitted",
-        "Not Achieved"
-      ];
-      return subStandards.sort(function(a, b) {
-        if (a.completed == b.completed) return a.completed - b.completed;
-        return (
-          completedOrder.indexOf(a.completed) -
-          completedOrder.indexOf(b.completed)
-        );
-      });
-    },
+    // filterSubjectStandardsRuakura: function(subjectName) {
+    //   var subStandards = this.standardsRuakura.filter(sub => {
+    //     return sub.subject == subjectName;
+    //   });
+    //   //order the standards by this custom order
+    //   var completedOrder = [
+    //     "In Moderation",
+    //     "Achieved",
+    //     "Merit",
+    //     "Excellence",
+    //     "Current",
+    //     "Upcoming",
+    //     "External",
+    //     "Not Submitted",
+    //     "Not Achieved"
+    //   ];
+    //   return subStandards.sort(function(a, b) {
+    //     if (a.completed == b.completed) return a.completed - b.completed;
+    //     return (
+    //       completedOrder.indexOf(a.completed) -
+    //       completedOrder.indexOf(b.completed)
+    //     );
+    //   });
+    // },
     formatTeacherName: function(name) {
       //format from 'Pa Ian' to 'ian'
       var splitName = name.split(" ")[0].toLowerCase();

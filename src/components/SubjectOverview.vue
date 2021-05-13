@@ -29,6 +29,7 @@ export default {
   },
   firestore: {},
   mounted() {
+    // console.log("loading for subject:",this.subject)
     this.$bind(
       "standards",
       db.collection(`/students/${this.student.id}/openCredits2021`)

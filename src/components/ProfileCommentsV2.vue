@@ -43,11 +43,11 @@ export default {
   mounted() {
     this.$bind(
       "standards",
-      db.collection(`/students/${this.student.id}/openCredits2020`)
+      db.collection(`/students/${this.student.id}/openCredits2021`)
     );
     this.$bind(
       "reportComments",
-      db.collection(`/students/${this.student.id}/reportComments2020`)
+      db.collection(`/students/${this.student.id}/reportComments2021`)
     ).then(() => {
           // splice out f&c. as is shown on its own page.
           for (var i = this.reportComments.length - 1; i >= 0; --i) {
