@@ -53,6 +53,13 @@ Science
                 <span v-if="standard.subject == 'Project Based Learning'" class="tag is-pbl is-normal">PBL</span>
                 <span v-if="standard.subject == 'Dance'" class="tag is-pbl is-normal">DANC</span>
                 <span v-if="standard.subject == 'Financial Literacy'" class="tag is-math is-normal">FILIT</span>
+                <span v-if="standard.subject == 'Taratahi'" class="tag is-digi is-normal">TARA</span>
+                <span v-if="standard.subject == 'UCOL'" class="tag is-digi is-normal">UCOL</span>
+                <span v-if="standard.subject == 'Te Reo Rangatira'" class="tag is-tika is-normal">REO</span>
+                <span v-if="standard.subject == 'Literacy'" class="tag is-eng is-normal">LIT</span>
+                <span v-if="standard.subject == 'Numeracy'" class="tag is-math is-normal">NUM</span>
+                <span v-if="standard.subject == 'Ako Module 1'" class="tag is-ako is-normal">AKO</span>
+                <span v-if="standard.subject == 'Ako Module 2'" class="tag is-ako is-normal">AKO</span>
               </td>
               <td v-if="!overview && student.school_year >= 11">{{standard.assessmentNum}}</td>
               <td>{{standard.assessmentName}}</td>
@@ -260,6 +267,11 @@ Science
 
   .tag:not(body).is-pbl {
     background-color: #7957d5;
+    color: white;
+  }
+
+    .tag:not(body).is-ako {
+    background-color: #e08a28;
     color: white;
   }
 </style>

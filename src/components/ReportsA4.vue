@@ -25,20 +25,21 @@
       </section> -->
 
       <!-- PAGE 2: FITNESS & CONDITIONING -->
-      <section
+      <!-- <section
         class="sheet padding-10mm"
         :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-295px 180px', backgroundRepeat: 'no-repeat'}"
-      >
-        <FitnessPage :student="student" :a4="true" />
-      </section>
+      > -->
+      <!-- TODO: FITNESS PAGE TURNED OFF. Error: Collection references must have an odd number of segments, but students/152123099/fitnessData/2021 has 4" -->
+        <!-- <FitnessPage :student="student" :a4="true" /> -->
+      <!-- </section> -->
 
       <!-- PAGE 3: COMMENTS 1 -->
-      <section
+      <!-- <section
         class="sheet padding-10mm"
         :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-295px 180px', backgroundRepeat: 'no-repeat'}"
       >
         <ProfileCommentsV2 :student="student" :firstPage="true" />
-      </section>
+      </section> -->
 
       <!-- PAGE 4: COMMENTS 2-->
       <section
@@ -49,12 +50,12 @@
       </section>
 
       <!-- PAGE 5: COMMENTS 3-->
-      <section
+      <!-- <section
         class="sheet padding-10mm"
         :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-295px 180px', backgroundRepeat: 'no-repeat'}"
       >
         <ProfileCommentsV2 :student="student" :thirdPage="true" />
-      </section>
+      </section> -->
 
       <!-- PAGE 5: COMMENTS 4-->
       <!-- <section
@@ -115,7 +116,8 @@ export default {
       loadedStudents: false,
       // image: require("@/assets/tohuLight.svg")
       // image: require("@/assets/tohu-grey.svg")
-      image: require("@/assets/tohu-mid-grey.svg")
+      image: require("@/assets/tohu-mid-grey.svg"),
+      yearLevel: this.$route.params.year
     };
   },
   methods: {
@@ -141,10 +143,10 @@ export default {
         "students",
         //  studentsDb.where("email", "array-contains", user.email)
         // studentsDb.orderBy("school_year") //LOADS ALL STUDENTS
-        studentsDb.where("school_year", ">=", 11 ) //LOAD SENIORS
-        // studentsDb.where("school_year", ">=", 13 ) //LOAD SENIORS
+        // studentsDb.where("school_year", ">=", 11 ) //LOAD SENIORS
+        //studentsDb.where("school_year", "==", Number(this.yearLevel) ) //LOAD SENIORS
         // studentsDb.where("school_year", "<", 11 ) //LOADS JUNIORS
-        // studentsDb.where("nsn", "==", 131547578 ) //LOAD by NSN
+        studentsDb.where("nsn", "==", 131547578 ) //LOAD by NSN (Aria)
       );
     },
     students(students) {

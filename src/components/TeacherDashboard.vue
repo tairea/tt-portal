@@ -31,7 +31,7 @@
       </div>
       
       <div class="flex-box">
-        <router-link to="/reports" target= '_blank'>
+        <router-link to="/chooseYear" target= '_blank'>
           <div class="box-3">
             <img class="cardImage" v-bind:src="require('@/assets/thumb-reports.jpg')" />
             <p class="cardTitle">REPORTS</p>

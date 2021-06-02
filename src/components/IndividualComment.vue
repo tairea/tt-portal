@@ -58,12 +58,12 @@
                     :key="subjectStandards.assessmentNum"
                   >
                     <!-- Assessment number -->
-                    <td class="numCell has-text-left numCellWidth">
+                    <td class="numCell has-text-centered numCellWidth">
                       {{ subjectStandards.assessmentNum.toUpperCase() }}
                     </td>
 
                     <!-- Assessment Name -->
-                    <td class="nameCell has-text-left nameCellWidth">
+                    <td class="nameCell has-text-centered nameCellWidth">
                       {{ subjectStandards.assessmentName }}
                     </td>
 
@@ -87,8 +87,8 @@
               </table>
             </div>
             <!-- Pie Chart.js -->
-            <div class="pie">
-              <SubjectPiechart :student="student" :subject="comment.subject" />
+            <div v-if="student.school_year >= 11" class="pie">
+              <SubjectPiechart :student="student" :subject="comment.subject" :standards="standards" />
             </div>
           </div>
         </div>
@@ -166,30 +166,30 @@ export default {
         );
       });
     },
-    filterSubjectStandardsRuakura: function(subjectName) {
-      var subStandards = this.standardsRuakura.filter(sub => {
-        return sub.subject == subjectName;
-      });
-      //order the standards by this custom order
-      var completedOrder = [
-        "In Moderation",
-        "Achieved",
-        "Merit",
-        "Excellence",
-        "Current",
-        "Upcoming",
-        "External",
-        "Not Submitted",
-        "Not Achieved"
-      ];
-      return subStandards.sort(function(a, b) {
-        if (a.completed == b.completed) return a.completed - b.completed;
-        return (
-          completedOrder.indexOf(a.completed) -
-          completedOrder.indexOf(b.completed)
-        );
-      });
-    },
+    // filterSubjectStandardsRuakura: function(subjectName) {
+    //   var subStandards = this.standardsRuakura.filter(sub => {
+    //     return sub.subject == subjectName;
+    //   });
+    //   //order the standards by this custom order
+    //   var completedOrder = [
+    //     "In Moderation",
+    //     "Achieved",
+    //     "Merit",
+    //     "Excellence",
+    //     "Current",
+    //     "Upcoming",
+    //     "External",
+    //     "Not Submitted",
+    //     "Not Achieved"
+    //   ];
+    //   return subStandards.sort(function(a, b) {
+    //     if (a.completed == b.completed) return a.completed - b.completed;
+    //     return (
+    //       completedOrder.indexOf(a.completed) -
+    //       completedOrder.indexOf(b.completed)
+    //     );
+    //   });
+    // },
     formatTeacherName: function(name) {
       //format from 'Pa Ian' to 'ian'
       var splitName = name.split(" ")[0].toLowerCase();
@@ -354,14 +354,12 @@ table {
 .numCell,
 .creditCell {
   font-size: 0.5rem;
-}
 
-.creditCell {
-  text-align: center;
 }
 
 .nameCell {
   font-size: 0.6rem;
+
 }
 
 .is-normal {

@@ -8,11 +8,11 @@
         <!-- <ProfileComments :student="student"/> -->
         <div v-if="isDesktop()" class="container profileWork">
           <ProfileCurrentWork :student="student" class="profileCurrent" />
-          <!-- <ProfileCompletedWork :student="student" class="profileCompleted" /> -->
+          <ProfileCompletedWork :student="student" class="profileCompleted" />
         </div>
         <div v-else>
           <ProfileCurrentWork :student="student" class="profileCurrent pt-6" />
-          <!-- <ProfileCompletedWork :student="student" class="profileCompleted" /> -->
+          <ProfileCompletedWork :student="student" class="profileCompleted" />
         </div>
         <!-- <ProfileOverviewWork :student="student" class="profileFinished" /> -->
         <!-- <ProfileFitness :student="student" class="profileFitness" /> -->

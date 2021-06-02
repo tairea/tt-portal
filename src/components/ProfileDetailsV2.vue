@@ -1,84 +1,95 @@
 <template>
-  <div class="columns is-mobile detailsContainer" :class="{darkGreyBg: a4}">
-    <div v-if="overview" class="column" >
-
-		<div class="logo">
-			 <img
-				id="tt-logo"
-				v-bind:src="require('@/assets/tt-logo.png')"
-				style=""
-				/>
-			<!-- <p id="presents">Presents</p> -->
-		</div>
+  <div class="columns is-mobile detailsContainer" :class="{ darkGreyBg: a4 }">
+    <div v-if="overview" class="column">
+      <div class="logo">
+        <img
+          id="tt-logo"
+          v-bind:src="require('@/assets/tt-logo.png')"
+          style=""
+        />
+        <!-- <p id="presents">Presents</p> -->
+      </div>
 
       <!-- PROFILE PIC -->
       <div class="column profileContainer">
-        
+        <img id="profile-pic" v-bind:src="taiohiPic" />
       </div>
 
-      
-	<!-- DETAILS-->
+      <!-- DETAILS-->
       <div class="column is-full">
         <!-- NAME -->
-        <p :class="{title: a4}" style="font-weight: bold; font-size: 2.2em">{{student.given_name}} {{student.family_name}}</p>
-        
-		    <!-- <p class="iwi">{{student.iwi.join(', ')}}</p> -->
+        <p :class="{ title: a4 }" style="font-weight: bold; font-size: 2.2em">
+          {{ student.given_name }} {{ student.family_name }}
+        </p>
 
-    	  <!-- EOY REPORT 2019 -->
+        <!-- <p class="iwi">{{student.iwi.join(', ')}}</p> -->
+
+        <!-- REPORT TITLE -->
         <div class="report" style="margin-top: 60px;">
-          <h2 v-if="a4"  style="font-weight: bold;">Mid Year Report<br><span style="font-size: 1.5em;">2021</span></h2>
+          <h2 v-if="a4" style="font-weight: bold;">
+            Mid-Year Report<br /><span style="font-size: 1.5em;">2021</span>
+          </h2>
         </div>
-
       </div>
-	  <!-- END DETAILS -->
-		
-		<!-- GAINED -->
-        <div class="ncea" style="margin-top: 30px;">
-        	<p v-if="student.school_year >= 11 && overview" :class="{subtitle: a4}"  style=" " ><strong style="color: white;">{{student.creditTotal >= 80 ? "Passed " : ""}} NCEA Level {{student.school_year % 10}} {{student.creditTotal >= 80 ? " with" : ""}}</strong></p>
-        	<!-- CREDIT # -->
-			<!-- <h2
+      <!-- END DETAILS -->
+
+      <!-- GAINED -->
+      <div class="ncea" style="margin-top: 30px;">
+        <p
+          v-if="student.school_year >= 11 && overview"
+          :class="{ subtitle: a4 }"
+          style=" "
+        >
+          <strong style="color: white;"
+            >{{ student.creditTotal >= 80 ? "Passed " : "" }} NCEA Level
+            {{ student.school_year % 10 }}
+            {{ student.creditTotal >= 80 ? " with" : "" }}</strong
+          >
+        </p>
+        <!-- CREDIT # -->
+        <!-- <h2
               v-if="student.school_year >= 11 && overview && ruakura"
               class="creditTotal"
             >{{getTotalRuakura()}}</h2> -->
-            
-            <div
-              v-if="overview && student.school_year >= 11"  
-              class="creditTotal"
+
+        <div v-if="overview && student.school_year >= 11" class="creditTotal">
+          <div v-if="getTotal !== 0 || student.creditTotal !== 0">
+            {{ student.creditTotal }}
+            <!-- {{ getTotal() }} -->
+            <!-- {{ getTotal() > student.creditTotal ? getTotal() : student.creditTotal }} -->
+
+            <!-- CREDITS -->
+            <h2
+              v-if="a4 && student.school_year >= 11 && overview"
+              class="credits"
+              style="font-size: 0.5em; "
             >
-            <div v-if="getTotal !== 0 || student.creditTotal !== 0">
-              {{student.creditTotal}}
-              <!-- {{ getTotal() }} -->
-              <!-- {{ getTotal() > student.creditTotal ? getTotal() : student.creditTotal }} -->
-              
-              <!-- CREDITS -->
-              <h2 v-if="a4 && student.school_year >= 11 && overview" class="credits" style="font-size: 0.5em; ">
-                Credits
-              </h2>
-            </div>
-            </div>
-			
-            
-		</div>
+              Credits
+            </h2>
+          </div>
+        </div>
+      </div>
 
-	
-
-		<!-- TOHU -->
-	   <div class="tohuContainer" :style="{ backgroundImage: 'url(' + image + ')', opacity:'0.4'}">
+      <!-- TOHU -->
+      <div
+        class="tohuContainer"
+        :style="{ backgroundImage: 'url(' + image + ')', opacity: '0.4' }"
+      >
         <!-- <img
           id="tohu-cover"
           v-bind:src="require('@/assets/tohu-grey.svg')"
         /> -->
       </div>
-
     </div>
 
-	<!-- V-ELSE -->
+    <!-- V-ELSE -->
     <div v-else class="columns is-mobile margin-5">
-      <div class="column">
-      </div>
+      <div class="column"></div>
       <div class="column has-text-left-mobile">
-        <p class="has-text-weight-semibold">{{student.given_name}} {{student.family_name}}</p>
-        <p>Year {{student.school_year}}</p>
+        <p class="has-text-weight-semibold">
+          {{ student.given_name }} {{ student.family_name }}
+        </p>
+        <p>Year {{ student.school_year }}</p>
         <!-- <h2 v-if="student.school_year >= 11" class="creditTotal">{{getTotal()}}</h2> -->
         <!-- <p class="iwi">{{student.iwi.join(', ')}}</p> -->
       </div>
@@ -90,7 +101,7 @@
 import Vue from "vue";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
-import { db } from "./firebaseInit";
+import { db, storage } from "./firebaseInit";
 
 Vue.use(Buefy);
 
@@ -100,8 +111,9 @@ export default {
   data() {
     return {
       standards: [],
-	  standardsRuakura: [],
-	  image: require("@/assets/tohuLight.svg")
+      standardsRuakura: [],
+      image: require("@/assets/tohuLight.svg"),
+      taiohiPic: "",
     };
   },
   mounted() {
@@ -110,17 +122,31 @@ export default {
       "standards",
       db.collection(`/students/${this.student.id}/openCredits2021`)
     );
+    this.getPicLink();
     // this.$bind(
     //   "standardsRuakura",
     //   db.collection(`/studentsRuakura/${this.student.id}/openCredits2020`)
     // );
   },
   methods: {
+    async getPicLink() {
+      var picUrl = await storage
+        .ref("taiohi2021/" + this.student.nsn + ".png")
+        .getDownloadURL()
+        .then(function(url) {
+          console.log("got pic url:", url);
+          return url;
+        })
+        .catch((err) => {
+          console.log("error: " + err.message);
+        });
+      this.taiohiPic = picUrl;
+    },
     getTotal() {
       // console.log("getting total")
       //=== achieved credits
       const achievedCredits = this.standards.filter(
-        stnd => stnd.completed == "Achieved"
+        (stnd) => stnd.completed == "Achieved"
       );
       const achievedTotal = achievedCredits.reduce(
         (prev /* number */, curr /* standard */) =>
@@ -130,7 +156,7 @@ export default {
       // console.log("achieved credits:", achievedTotal);
       //=== merit credits
       const meritCredits = this.standards.filter(
-        stnd => stnd.completed == "Merit"
+        (stnd) => stnd.completed == "Merit"
       );
       const meritTotal = meritCredits.reduce(
         (prev /* number */, curr /* standard */) =>
@@ -140,7 +166,7 @@ export default {
       // console.log("merit credits:", meritTotal);
       //=== excellence credits
       const excellenceCredits = this.standards.filter(
-        stnd => stnd.completed == "Excellence"
+        (stnd) => stnd.completed == "Excellence"
       );
       const excellenceTotal = excellenceCredits.reduce(
         (prev /* number */, curr /* standard */) =>
@@ -157,7 +183,7 @@ export default {
     getTotalRuakura() {
       //=== achieved credits
       const achievedCredits = this.standardsRuakura.filter(
-        stnd => stnd.completed == "Achieved"
+        (stnd) => stnd.completed == "Achieved"
       );
       const achievedTotal = achievedCredits.reduce(
         (prev /* number */, curr /* standard */) =>
@@ -168,7 +194,7 @@ export default {
 
       //=== merit credits
       const meritCredits = this.standardsRuakura.filter(
-        stnd => stnd.completed == "Merit"
+        (stnd) => stnd.completed == "Merit"
       );
       const meritTotal = meritCredits.reduce(
         (prev /* number */, curr /* standard */) =>
@@ -179,7 +205,7 @@ export default {
 
       //=== excellence credits
       const excellenceCredits = this.standardsRuakura.filter(
-        stnd => stnd.completed == "Excellence"
+        (stnd) => stnd.completed == "Excellence"
       );
       const excellenceTotal = excellenceCredits.reduce(
         (prev /* number */, curr /* standard */) =>
@@ -196,13 +222,13 @@ export default {
     formatStudentName: function(name) {
       var name = name.replace(/\s/g, "");
       return name.toLowerCase();
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Cantarell:400i|Caudex|Eczar|Exo|Itim|Marcellus|Noto+Serif+SC|Quattrocento|Stoke|ZCOOL+XiaoWei&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Cantarell:400i|Caudex|Eczar|Exo|Itim|Marcellus|Noto+Serif+SC|Quattrocento|Stoke|ZCOOL+XiaoWei&display=swap");
 /*
 font-family: 'Exo', sans-serif;
 font-family: 'Quattrocento', serif;
@@ -215,7 +241,6 @@ font-family: 'Eczar', serif;
 font-family: 'Noto Serif SC', serif;
 font-family: 'Caudex', serif;
 */
-
 
 .darkGreyBg {
   background-color: #393e46;
@@ -232,34 +257,33 @@ font-family: 'Caudex', serif;
 }
 
 #tt-logo {
-	width: 150px;
+  width: 150px;
 }
 
 #presents {
-	color:white; 
-	font-size: 1.3em;
-	font-family: 'ZCOOL XiaoWei', serif;
+  color: white;
+  font-size: 1.3em;
+  font-family: "ZCOOL XiaoWei", serif;
 }
 
 /* Name */
 .title {
-	margin-top: 20px;
-	/* font-family: 'Caudex', serif; */
-	font-family: 'Stoke', serif;
-	color: white;
-	font-size: 3em;
+  margin-top: 20px;
+  /* font-family: 'Caudex', serif; */
+  font-family: "Stoke", serif;
+  color: white;
+  font-size: 3em;
 }
 
 .iwi {
-	color: white;
-	font-size: 2em;
-	font-family: 'Itim', cursive;
+  color: white;
+  font-size: 2em;
+  font-family: "Itim", cursive;
 }
 
-.subtitle
- {
+.subtitle {
   color: white;
-  font-family: 'ZCOOL XiaoWei', serif;
+  font-family: "ZCOOL XiaoWei", serif;
 }
 
 .credits {
@@ -270,7 +294,6 @@ font-family: 'Caudex', serif;
 }
 
 .creditTotal {
-
   /* font-family: 'ZCOOL XiaoWei', serif; */
   /* font-family: 'Eczar', serif; */
 
@@ -293,13 +316,13 @@ font-family: 'Caudex', serif;
 }
 
 .report {
-	font-size: 1.6em;
-	font-family: 'Caudex', serif;
-  	color: white;
-	font-weight: bold;
-	z-index: 20;
-	position: relative;
-	margin-top: -10px;
+  font-size: 1.6em;
+  font-family: "Caudex", serif;
+  color: white;
+  font-weight: bold;
+  z-index: 20;
+  position: relative;
+  margin-top: -10px;
 }
 
 .profileContainer {
@@ -325,20 +348,16 @@ font-family: 'Caudex', serif;
   z-index: 0;
 
   background-position: -25px 66px;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
 
-   
   /* -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50);
   -moz-opacity: 0.5;
   -khtml-opacity: 0.5;
   opacity: 0.5; */
-
-
 }
 
 .tohuContainer {
-  
   /*
   opacity: 0.5;
   filter: alpha(opacity=50); For IE8 and earlier
@@ -353,9 +372,6 @@ font-family: 'Caudex', serif;
   object-fit: cover;
   background-color: #777777; */
 }
-
-
-
 
 .columns {
   flex: auto;

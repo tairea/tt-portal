@@ -11,6 +11,7 @@ import DashboardA4Ruakura from '@/components/DashboardA4Ruakura'
 import AcademicBoard from '@/components/AcademicBoard'
 import Timetable from '@/components/Timetable'
 import ChooseSubject from '@/components/ChooseSubject'
+import ChooseYear from '@/components/ChooseYear'
 import BySubject from '@/components/BySubject'
 
 import firebase from 'firebase'
@@ -44,15 +45,15 @@ let router = new Router({
         requiresGuest: true
       }
     },
-    {
-      path: '/reports',
-      name: 'reportsA4',
-      // component: JuniorITLPA4,
-      component: ReportsA4,
-      meta: {
-        requiresAuth: true
-      }
-    },
+    // {
+    //   path: '/reports',
+    //   name: 'reportsA4',
+    //   // component: JuniorITLPA4,
+    //   component: ReportsA4,
+    //   meta: {
+    //     requiresAuth: true
+    //   }
+    // },
     {
       path: '/itlp',
       name: 'itlp',
@@ -73,6 +74,22 @@ let router = new Router({
       path: '/subject',
       name: 'subject',
       component: BySubject,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/chooseYear',
+      name: 'chooseYear',
+      component: ChooseYear,
+      meta: {
+        requiresAuth: true
+      } 
+    },
+    {
+      path: '/yearReport',
+      name: 'yearReport',
+      component: ReportsA4,
       meta: {
         requiresAuth: true
       }
@@ -117,12 +134,11 @@ const teacherEmails = [
   'i.tairea@taiwananga.co.nz',
   'h.childs@taiwananga.co.nz',
   'c.morgan@taiwananga.co.nz',
-  't.waihi@taiwananga.co.nz',
-  'c.kauri@taiwananga.co.nz',
-  'n.reid@taiwananga.co.nz',
-  'a.walker@taiwananga.co.nz',
+  't.waihi@taiwananga.co.nz',,
   'teana.waihi@taiwananga.co.nz',
   't.westrupp@taiwananga.co.nz',
+  'a.smeaton@taiwananga.co.nz',
+  'k.james@taiwananga.co.nz'
 
 ];
 const teacherEmailsRuakura = [

@@ -136,7 +136,7 @@ export default {
     // get fitness data from firebase
     this.$bind(
       "fitnessData",
-      db.collection(`/students/${this.student.id}/fitnessData2021`)
+      db.collection(`/students/${this.student.id}/fitnessData/2021`)
     );
      this.$bind(
       "reportComments",
