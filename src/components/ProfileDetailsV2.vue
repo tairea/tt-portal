@@ -12,7 +12,7 @@
 
       <!-- PROFILE PIC -->
       <div class="column profileContainer">
-        <img id="profile-pic" v-bind:src="taiohiPic" />
+        <img :id="student.school_year < 11 ? 'profile-pic-junior' : 'profile-pic-senior'" v-bind:src="taiohiPic"/>
       </div>
 
       <!-- DETAILS-->
@@ -364,13 +364,18 @@ font-family: 'Caudex', serif;
   */
 }
 
-#profile-pic {
+#profile-pic-senior {
   width: 400px;
   height: 400px;
 
   /* border-radius: 50%;
   object-fit: cover;
   background-color: #777777; */
+}
+
+#profile-pic-junior {
+  width: 600px;
+  height: 600px;
 }
 
 .columns {

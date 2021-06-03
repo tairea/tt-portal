@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <!-- <h2 class="title is-6 has-text-centered" v-if="!overview">FITNESS & CONDITIONING</h2> -->
+    <h2 class="title is-6 has-text-centered" v-if="!overview">FITNESS & CONDITIONING</h2>
     <!-- <div class="columns is-mobile"> -->
 
     <!-- FITNESS & CONDITIONING COMMENT -->
@@ -136,7 +136,7 @@ export default {
     // get fitness data from firebase
     this.$bind(
       "fitnessData",
-      db.collection(`/students/${this.student.id}/fitnessData/2021`)
+      db.collection(`/students/${this.student.id}/fitnessData2021/`)
     );
      this.$bind(
       "reportComments",

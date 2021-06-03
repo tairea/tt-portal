@@ -4,7 +4,7 @@
     <!-- <div class="columns is-mobile"> -->
     <div class="columns">
       <!-- Pie Chart.js -->
-      <canvas v-bind:id="studentName+ nospaces(subjectName) +'Chart'"></canvas>
+      <canvas v-bind:id="studentName+ subjectName +'Chart'"></canvas>
     </div>
     <!-- </div> -->
   </div>
@@ -17,10 +17,10 @@ import "chartjs-plugin-labels";
 
 export default {
   name: "SubjectPiechart",
-  props: ["student", "subject", "standards"],
+  props: ["student", "subject"],
   data() {
     return {
-      // standards: [],
+      standards: [],
       standardStatus: [],
       pieChart: null,
       chartCount: null,
@@ -32,10 +32,10 @@ export default {
   computed: {},
   mounted() {
     // get standards from firebase
-    // this.$bind(
-    //   "standards",
-    //   db.collection(`/students/${this.student.id}/openCredits2020`)
-    // );
+    this.$bind(
+      "standards",
+      db.collection(`/students/${this.student.id}/openCredits2021`)
+    );
     this.studentName = this.student.given_name;
     this.subjectName = this.subject;
     // console.log("standards from pie",this.standards)
@@ -69,7 +69,7 @@ export default {
     },
     loadChart() {
       // console.log("loading chart...");
-      var ctx = document.getElementById(this.studentName + nospaces(this.subjectName) + "Chart");
+      var ctx = document.getElementById(this.studentName + this.subjectName + "Chart");
       // .getContext("2d");
       this.pieChart = new Chart(ctx, {
         type: "pie",
