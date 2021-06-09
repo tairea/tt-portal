@@ -146,7 +146,7 @@ export default {
         // studentsDb.orderBy("school_year") //LOADS ALL STUDENTS
         // studentsDb.where("school_year", ">=", 11 ) //LOAD SENIORS
         // studentsDb.where("school_year", "<", 11 ) //LOADS JUNIORS
-        //studentsDb.where("nsn", "==", 143457490 ) //LOAD by NSN (Te Ahu
+        //studentsDb.where("nsn", "==", 138091529 ) //LOAD by NSN (Te Ahu
       );
     },
     students(students) {

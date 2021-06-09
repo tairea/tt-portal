@@ -1,12 +1,12 @@
 <template>
   <div class="container">
 
-    <h2 class="title is-6 has-text-centered" v-if="!overview">FITNESS & CONDITIONING</h2>
+    <!-- <h2 class="title is-6 has-text-centered" v-if="!overview">FITNESS & CONDITIONING</h2> -->
     <!-- <div class="columns is-mobile"> -->
 
     <!-- FITNESS & CONDITIONING COMMENT -->
     <IndividualComment  :student="student" :reportComments="reportComments.filter(fitnessComment)" :fitness="true" />
-    <!-- <IndividualComment  :student="student" :reportComments="fitnessComment" :fitness="true" /> -->
+    <!-- <IndividualComment  :student="student" :reportComments="fitnessComment()" :fitness="true" /> -->
 
     <div v-if="a4" class="chartsContainerColumn">
       <!-- Pie Chart.js -->
@@ -153,6 +153,7 @@ export default {
   computed: {},
   methods: {
     fitnessComment(report) {
+      console.log("getting F&C comment")
       //get the fitness & conditioning comment only
       if (report.subject == "Fitness & Conditioning") {
         return report

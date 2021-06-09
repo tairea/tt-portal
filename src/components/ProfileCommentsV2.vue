@@ -12,7 +12,7 @@
     <IndividualComment v-else-if="thirdPage == true" :student="student" :reportComments="reportComments.slice(6,reportComments.length)" :standards="standards" />
 
     <!-- FOURTH PAGE TUTOA -->
-    <!-- <IndividualComment v-else-if="fourthPage == true" :student="student" :reportComments="reportComments.slice(6,reportComments.length)" :standards="standards" /> -->
+    <IndividualComment v-else-if="fourthPage == true" :student="student" :reportComments="reportComments.slice(6,reportComments.length)" :standards="standards" />
   </div>
 </template>
 
