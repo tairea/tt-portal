@@ -1,3 +1,5 @@
+TAIOHI CARD
+
 <template>
   <div class="card" outlined>
     <!-- <v-card-title class="headline">{{student.given_name}}</v-card-title> -->
@@ -6,20 +8,20 @@
     <div v-if="!photosCheckbox" class="profileNumber">
             {{getTaiohiSecretNumber(student.nsn)}}
         </div>
-    <div v-else class="profileNumber">
+    <!-- <div v-else class="profileNumber">
       {{ student.given_name }}
-    </div>
-    <!-- <img v-else :src="photo" class="profilePic" /> -->
+    </div> -->
+    <img v-else :src="photo" class="profilePic" />
 
     <!-- CREDIT TOTAL -->
     <!-- <div class="creditTotal">{{student.creditTotal}}</div> -->
 
     <!-- CURRENT TOTAL -->
-    <div class="creditsCurrentTotal">{{ student.creditTotal }}</div>
+    <div class="credits2021Total">{{ student.creditTotal }}</div>
     <!-- THIS YEAR TOTAL -->
-    <div class="credits2021Total">{{ calcPassedTotal() }}</div>
+    <!-- <div class="credits2021Total">{{ calcPassedTotal() }}</div> -->
     <!-- CALC ON OFFER -->
-    <div class="creditsOnOffer">{{ calcAllCreditsOnOffer() }}</div>
+    <div class="creditsOnOffer">{{ calcRemainingCredits() }}</div>
 
     <!-- PIE CHART -->
     <PieChart
@@ -45,7 +47,7 @@
           />
         </div>
         <div class="subjectLabel">
-          <p class="subjectName">{{ subject.substring(0, 4).toUpperCase() }}</p>
+          <p class="subjectName">{{ getSubjectName(subject) }}</p>
           <!-- <span v-if="subject == 'Innovation'" class="tag is-digi is-normal">INNO</span>
                         <span v-if="subject == 'English'" class="tag is-eng is-normal">ENG</span>
                         <span v-if="subject == 'Work Ready'" class="tag is-eng is-normal">WORK</span>
@@ -94,7 +96,7 @@ export default {
   },
   mounted() {
     // get photo
-    this.getNormalProfilePic(this.student.given_name);
+    this.getNormalProfilePic(this.student.nsn);
     // get standards from firebase
     this.$bind(
       "standards",
@@ -120,10 +122,10 @@ export default {
       // console.log("subjectStandards:for:"+subject+"for"+this.studentName+"=",subjectStandards)
       return subjectStandards;
     },
-    getNormalProfilePic(name) {
-      name = name.split(" ").join("");
+    getNormalProfilePic(nsn) {
+      // name = name.split(" ").join("");
       storage
-        .ref("taiohi/" + name.toLowerCase() + ".png")
+        .ref("taiohi2021/" + nsn + ".png")
         .getDownloadURL()
         .then((url) => {
           this.photo = url;
@@ -156,6 +158,23 @@ export default {
     },
     calcPassedTotal() {
         return this.getTotal("Achieved") + this.getTotal("Merit") + this.getTotal("Excellence")
+    },
+    calcRemainingCredits() {
+      const standardsRemaining = this.standards.filter(
+        (stnd) => (stnd.completed == "Current" ||  stnd.completed == "Upcoming")
+      );
+      const totalCreditsOfRemaining = standardsRemaining.reduce(
+        (acc, curr) => acc + curr.assessmentCredits,
+        0
+      );
+      console.log("totalCreditsOfRemaining",totalCreditsOfRemaining)
+      return totalCreditsOfRemaining;
+    },
+    getSubjectName(subject) {
+      if (subject == "Physical Education"){return 'PE'}
+      if (subject == "Te Kapa Haka o Te Ara Toa"){return 'HAKA'}
+      if (subject == "Te Reo Māori"){return 'REO'}
+      return subject.substring(0, 4).toUpperCase()
     }
   },
 };
@@ -166,7 +185,7 @@ export default {
 
 .card {
   box-sizing: border-box;
-  margin: 10px;
+  margin: 5px;
   // border: 1px solid rgba(0,0,0,0.05);
   display: flex;
   justify-content: flex-start;

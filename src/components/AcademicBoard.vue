@@ -19,6 +19,12 @@
           </div>
           <!-- KEY -->
           <div class="chart-key">
+            <div class="credits2021Total" style="display: flex;">
+              <span style="font-size: 0.8rem;">Credits Total</span>
+            </div>
+            <div class="creditsOnOffer" style="display: flex;">
+              <span style="font-size: 0.8rem;">Remaining Credits on Offer</span>
+            </div>
             <div style="display: flex;">
               <div class="square" style="background-color: #23d160"></div>
               <span style="font-size: 0.8rem;">Passed</span>
@@ -26,6 +32,10 @@
             <div style="display: flex;">
               <div class="square" style="background-color: #ff3860"></div>
               <span style="font-size: 0.8rem;">Not Achieved</span>
+            </div>
+            <div style="display: flex;">
+              <div class="square" style="background-color: #fbb13c"></div>
+              <span style="font-size: 0.8rem;">In Moderation</span>
             </div>
             <div style="display: flex;">
               <div class="square" style="background-color: #ffdc57"></div>
@@ -66,6 +76,12 @@
           </div>
           <!-- KEY -->
           <div class="chart-key">
+             <div class="credits2021Total" style="display: flex;">
+              <span style="font-size: 0.8rem;">Credits Total</span>
+            </div>
+            <div class="creditsOnOffer" style="display: flex;">
+              <span style="font-size: 0.8rem;">Remaining Credits on Offer</span>
+            </div>
             <div style="display: flex;">
               <div class="square" style="background-color: #23d160"></div>
               <span style="font-size: 0.8rem;">Passed</span>
@@ -73,6 +89,10 @@
             <div style="display: flex;">
               <div class="square" style="background-color: #ff3860"></div>
               <span style="font-size: 0.8rem;">Not Achieved</span>
+            </div>
+            <div style="display: flex;">
+              <div class="square" style="background-color: #fbb13c"></div>
+              <span style="font-size: 0.8rem;">In Moderation</span>
             </div>
             <div style="display: flex;">
               <div class="square" style="background-color: #ffdc57"></div>
@@ -207,4 +227,32 @@ export default {
   top: 0px;
   left: 0px;
 }
+
+.credits2021Total {
+    background-color: #23d160;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: none;
+
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Chango", cursive;
+    font-size: 20px;
+    color: #fff;
+    // color: #efabff;
+  }
+  .creditsOnOffer {
+    margin: 0px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Chango", cursive;
+    font-size: 18px;
+    color: #7957d5;
+    width: 60px;
+    height: 60px;
+  }
 </style>
