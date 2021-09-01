@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="">
     <h2 class="title is-6 has-text-centered" v-if="!overview">FITNESS & CONDITIONING</h2>
     <!-- <div class="columns is-mobile"> -->
 
@@ -187,44 +187,48 @@ export default {
         fitnessStuff = "No fitness data";
       }
       switch (activity) {
-        case "run4k":
-          var run4k = fitnessStuff[0].run4k;
-          var filteredrun4k = run4k.filter(function(el) {
-            return el != "";
-          });
-          // console.log("run4k:", filtered);
+         case "run4k":{
+          const run4kTimes = fitnessStuff[0].run4k;
+          //get index of training absenses
+          const run4kempties = run4kTimes.flatMap((runs, i) => runs === '' ? i : []);
+          //remove times and dates student wasnt there.
+          const filteredrun4k = run4kTimes.filter((d, i) => run4kempties.indexOf(i) == -1)
+          // console.log(run4kTimes)
+          // console.log(run4kempties)
+          // console.log(filteredrun4k)
           return filteredrun4k;
-        case "run4halfk":
-          var run4halfk = fitnessStuff[0].run4halfk;
-          var filteredrun4halfk = run4halfk.filter(function(el) {
-            return el != "";
-          });
-          // console.log("run4k:", filtered);
-          return filteredrun4halfk;
-        case "run5k":
-          var run5k = fitnessStuff[0].run5k;
-          var filteredrun5k = run5k.filter(function(el) {
-            return el != "";
-          });
-          // console.log("run4k:", filtered);
-          return filteredrun5k;
-        case "yoyo":
-          // console.log("yoyo:", fitnessStuff[0].yoyo);
-          return fitnessStuff[0].yoyo;
-        case "pressups":
-          // console.log("preesups:", fitnessStuff[0].pressups);
-          return fitnessStuff[0].pressups;
-        case "situps":
-          // console.log("situps:", fitnessStuff[0].situps);
-          return fitnessStuff[0].situps;
-        case "burpees":
-          // console.log("pullups:", fitnessStuff[0].burpees);
-          return fitnessStuff[0].burpees;
-        case "airsquats":
-          // console.log("pullups:", fitnessStuff[0].airquats);
-          return fitnessStuff[0].airsquats;
+        }
+       case "yoyo":{
+          const yoyoTimes = fitnessStuff[0].yoyo;
+          const yoyoempties = yoyoTimes.flatMap((yoyo, i) => yoyo === '' ? i : []);
+          const filteredyoyo = yoyoTimes.filter((d, i) => yoyoempties.indexOf(i) == -1)
+          return filteredyoyo;
+        }
+        case "pressups":{
+          const pressupsTimes = fitnessStuff[0].pressups
+          const pressupsempties = pressupsTimes.flatMap((pressup, i) => pressup === '' ? i : []);
+          const filteredpressups = pressupsTimes.filter((d, i) => pressupsempties.indexOf(i) == -1)
+          return filteredpressups;
+        }
+        case "situps":{
+          const situpsTimes = fitnessStuff[0].situps
+          const situpsempties = situpsTimes.flatMap((situp, i) => situp === '' ? i : []);
+          const filteredsitups = situpsTimes.filter((d, i) => situpsempties.indexOf(i) == -1)
+          return filteredsitups;
+        }
+        case "burpees":{
+          const burpeesTimes = fitnessStuff[0].burpees
+          const burpeesempties = burpeesTimes.flatMap((burpee, i) => burpee === '' ? i : []);
+          const filteredburpees = burpeesTimes.filter((d, i) => burpeesempties.indexOf(i) == -1)
+          return filteredburpees;
+        }
+      case "airsquats":{
+        const airsquatsTimes = fitnessStuff[0].airsquats
+        const airsquatsempties = airsquatsTimes.flatMap((airsquat, i) => airsquat === '' ? i : []);
+        const filteredairsquats = airsquatsTimes.filter((d, i) => airsquatsempties.indexOf(i) == -1)
+        return filteredairsquats;
+      }
         default:
-          console.log("switch broke. dunno");
       }
     },
     getLengthArray(activity) {
@@ -236,70 +240,50 @@ export default {
         fitnessStuff = "No fitness data";
       }
       switch (activity) {
-        case "run4k":
-          var run4k = fitnessStuff[0].run4k;
-          var filtered = run4k.filter(function(el) {
-            return el != "";
-          });
-          var run4kLength = filtered.length;
-          var arrayOfNumbers = [...Array(run4kLength + 1).keys()].slice(1);
-          return arrayOfNumbers;
-        case "run4halfk":
-          var run4halfk = fitnessStuff[0].run4halfk;
-          var filtered = run4halfk.filter(function(el) {
-            return el != "";
-          });
-          var run4kLength = filtered.length;
-          var arrayOfNumbers = [...Array(run4kLength + 1).keys()].slice(1);
-          return arrayOfNumbers;
-        case "run5k":
-          var run5k = fitnessStuff[0].run5k;
-          var filtered = run5k.filter(function(el) {
-            return el != "";
-          });
-          var run5kLength = filtered.length;
-          var arrayOfNumbers = [...Array(run5kLength + 1).keys()].slice(1);
-          return arrayOfNumbers;
-        case "yoyo":
-          var yoyo = fitnessStuff[0].yoyo;
-          var filtered = yoyo.filter(function(el) {
-            return el != "";
-          });
-          var yoyoLength = filtered.length;
-          var arrayOfNumbers = [...Array(yoyoLength + 1).keys()].slice(1);
-          return arrayOfNumbers;
-        case "pressups":
-          var pressup = fitnessStuff[0].pressups;
-          var filtered = pressup.filter(function(el) {
-            return el != "";
-          });
-          var pressupLength = filtered.length;
-          var arrayOfNumbers = [...Array(pressupLength + 1).keys()].slice(1);
-          return arrayOfNumbers;
-        case "situps":
-          var situp = fitnessStuff[0].situps;
-          var filtered = situp.filter(function(el) {
-            return el != "";
-          });
-          var situpLength = filtered.length;
-          var arrayOfNumbers = [...Array(situpLength + 1).keys()].slice(1);
-          return arrayOfNumbers;
-        case "airsquats":
-          var airsquat = fitnessStuff[0].airsquats;
-          var filtered = airsquat.filter(function(el) {
-            return el != "";
-          });
-          var airsquatLength = filtered.length;
-          var arrayOfNumbers = [...Array(airsquatLength + 1).keys()].slice(1);
-          return arrayOfNumbers;
-        case "burpees":
-          var burpee = fitnessStuff[0].burpees;
-          var filtered = burpee.filter(function(el) {
-            return el != "";
-          });
-          var burpeeLength = filtered.length;
-          var arrayOfNumbers = [...Array(burpeeLength + 1).keys()].slice(1);
-          return arrayOfNumbers;
+       case "run4k":{
+          const run4kTimes = fitnessStuff[0].run4k;
+          const run4kDates = fitnessStuff[0].run4kDates;
+          //get index of training absenses
+          const run4kempties = run4kTimes.flatMap((runs, i) => runs === '' ? i : []);
+          //remove dates student wasnt there.
+          const filteredrun4kDates = run4kDates.filter((d, i) => run4kempties.indexOf(i) == -1)
+          return filteredrun4kDates;
+        }
+        case "yoyo":{
+          const yoyoTimes = fitnessStuff[0].yoyo;
+          const yoyoDates = fitnessStuff[0].yoyoDates;
+          const yoyoempties = yoyoTimes.flatMap((yoyo, i) => yoyo === '' ? i : []);
+          const filteredyoyoDates = yoyoDates.filter((d, i) => yoyoempties.indexOf(i) == -1)
+          return filteredyoyoDates;
+        }
+        case "pressups":{
+          const pressupsTimes = fitnessStuff[0].pressups;
+          const pressupsDates = fitnessStuff[0].strengthDates;
+          const pressupsempties = pressupsTimes.flatMap((preesup, i) => preesup === '' ? i : []);
+          const filteredpressupsDates = pressupsDates.filter((d, i) => pressupsempties.indexOf(i) == -1)
+          return filteredpressupsDates;
+        }
+        case "situps": {
+          const situpsTimes = fitnessStuff[0].situps;
+          const situpsDates = fitnessStuff[0].strengthDates;
+          const situpsempties = situpsTimes.flatMap((situp, i) => situp === '' ? i : []);
+          const filteredsitupsDates = situpsDates.filter((d, i) => situpsempties.indexOf(i) == -1)
+          return filteredsitupsDates;
+        }
+        case "airsquats": {
+          const airsquatsTimes = fitnessStuff[0].airsquats;
+          const airsquatsDates = fitnessStuff[0].strengthDates;
+          const airsquatsempties = airsquatsTimes.flatMap((airsquat, i) => airsquat === '' ? i : []);
+          const filteredairsquatsDates = airsquatsDates.filter((d, i) => airsquatsempties.indexOf(i) == -1)
+          return filteredairsquatsDates;
+        }
+        case "burpees": {
+          const burpeesTimes = fitnessStuff[0].burpees;
+          const burpeesDates = fitnessStuff[0].strengthDates;
+          const burpeesempties = burpeesTimes.flatMap((burpee, i) => burpee === '' ? i : []);
+          const filteredburpeesDates = burpeesDates.filter((d, i) =>  burpeesempties.indexOf(i) == -1)
+          return filteredburpeesDates;
+        }
         default:
           console.log("switch broke. dunno");
       }
@@ -365,7 +349,7 @@ export default {
             },
           ],
           // labels: this.getLengthArray("run4k")
-          labels: this.getDateLabels("run4kDates"),
+          labels: this.getLengthArray("run4k")
         },
         options: {
           responsive: true,
@@ -437,7 +421,7 @@ export default {
               spanGaps: false
             }
           ],
-          labels: this.getDateLabels("yoyoDates")
+          labels: this.getLengthArray("yoyo")
         },
         options: {
           responsive: true,

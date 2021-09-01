@@ -6,7 +6,8 @@
         <ProfileDetails :overview="true" :student="student" class="margin-5 profileDetails" />
         <!-- <ProfileITLP :student="student"/> -->
         <!-- <ProfileComments :student="student"/> -->
-        <div v-if="isDesktop()" class="container profileWork">
+        <ProfileOverviewWork :student="student" class="profileFinished" />
+        <div v-if="isDesktop()" class=" profileWork">
           <ProfileCurrentWork :student="student" class="profileCurrent" />
           <ProfileCompletedWork :student="student" class="profileCompleted" />
         </div>
@@ -14,8 +15,7 @@
           <ProfileCurrentWork :student="student" class="profileCurrent pt-6" />
           <ProfileCompletedWork :student="student" class="profileCompleted" />
         </div>
-        <!-- <ProfileOverviewWork :student="student" class="profileFinished" /> -->
-        <!-- <ProfileFitness :student="student" class="profileFitness" /> -->
+        <ProfileFitness :student="student" class="profileFitness" />
         <hr />
       </div>
     </div>
@@ -63,7 +63,7 @@ export default {
     ProfileDetails,
     // ProfileITLP,
     ProfileFitness,
-    // ProfileComments,
+    ProfileComments,
     ProfileCurrentWork,
     ProfileCompletedWork,
     ProfileOverviewWork
@@ -78,6 +78,7 @@ export default {
   },
   methods: {
     isDesktop() {
+      console.log(screen.width)
       return screen.width > 1200
     },
     logout: function() {

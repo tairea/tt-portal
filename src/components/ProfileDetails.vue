@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="columns is-mobile profileDetails"
-    :class="{ darkGreyBg: true }"
-  >
+  <div class="columns is-mobile profileDetails mb-4" :class="{ darkGreyBg: true }">
     <div v-if="overview" class="column" style="z-index: 100;">
       <div class="column">
         <!-- PROFILE PIC -->
@@ -20,9 +17,14 @@
           <p :class="{ subtitle: a4 }" style="font-weight: bold">
             Year {{ student.school_year }}
           </p>
+          <!-- NSN -->
           <p :class="{ subtitle: a4 }" style="font-size: 0.7rem">
             NSN {{ student.nsn }}
           </p>
+        </div>
+        <!-- ITLP -->
+        <div class="column" v-if="student.itlp">
+          <ProfileITLP :student="student" />
         </div>
         <!-- CREDITS -->
         <!-- <h2
@@ -70,17 +72,22 @@ import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 import { db, storage } from "./firebaseInit";
 
+import ProfileITLP from "./ProfileITLP.vue";
+
 Vue.use(Buefy);
 
 export default {
   name: "ProfileDetails",
   props: ["student", "overview", "a4", "ruakura"],
+  components: {
+    ProfileITLP,
+  },
   data() {
     return {
       standards: [],
       standardsRuakura: [],
       taiohiPic: "",
-      image: require("@/assets/tohuLight.svg")
+      image: require("@/assets/tohuLight.svg"),
     };
   },
   mounted() {
@@ -204,24 +211,23 @@ export default {
 }
 
 .profileDetails {
-  position: relative; 
+  position: relative;
 }
 
-.profileDetails::before {    
-      content: "";
-      background-image: url('~@/assets/tohuLight.svg');
-      background-size: cover;
-      position: absolute;
-      width: 100vw;
-      top: -75px;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      margin: auto;
-      opacity: 0.1;
-      transform: rotate(180deg);
+.profileDetails::before {
+  content: "";
+  background-image: url("~@/assets/tohuLight.svg");
+  background-size: cover;
+  position: absolute;
+  width: 100vw;
+  top: -75px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  opacity: 0.1;
+  transform: rotate(180deg);
 }
-
 
 .title,
 .subtitle,

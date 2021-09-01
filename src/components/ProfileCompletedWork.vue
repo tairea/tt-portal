@@ -76,6 +76,8 @@ Science
                   class="tag is-info">{{standard.completed.toUpperCase()}}</span>
                 <span v-else-if="standard.completed == 'Excellence'"
                   class="tag is-primary">{{standard.completed.toUpperCase()}}</span>
+                <span v-else-if="standard.completed == 'Moderation'"
+                  class="tag is-moderation">{{standard.completed.toUpperCase()}}</span>
                 <span v-else class="tag is-light">{{standard.completed.toUpperCase()}}</span>
               </td>
               <td>
@@ -271,7 +273,12 @@ Science
   }
 
     .tag:not(body).is-ako {
-    background-color: #e08a28;
+    background-color: #fbb13c;
+    color: white;
+  }
+
+    .tag:not(body).is-moderation {
+    background-color: #fbb13c;
     color: white;
   }
 </style>

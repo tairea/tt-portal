@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <h2 class="title is-6 has-text-centered" :style="overview ? 'font-size:0.7em':''">OVERVIEW</h2>
+  <div class="d-flex justify-">
+    <h2 class="title is-6 has-text-centered" :style="overview ? 'font-size:0.7em':''">2021 OVERVIEW</h2>
     <!-- <div class="columns is-mobile"> -->
     <div v-if="student.school_year >= 11" class="columns">
       <!-- Pie Chart.js -->
@@ -78,16 +78,17 @@ export default {
               data: [
                 this.getTotal("Upcoming"),
                 this.getTotal("Current"),
+                this.getTotal("Moderation"),
                 this.getTotal("Achieved") +
-                  this.getTotal("Merit") +
-                  this.getTotal("Excellence"),
+                this.getTotal("Merit") +
+                this.getTotal("Excellence"),
                 this.getTotal("Not Achieved") + this.getTotal("Not Submitted")
               ],
-              backgroundColor: ["#209cee", "#ffdc57", "#23d160", "#ff3860"],
+              backgroundColor: ["#209cee", "#ffdc57", "#fbb13c", "#23d160", "#ff3860"],
               label: "Dataset 1"
             }
           ],
-          labels: ["Upcoming", "Current", "Achieved", "Not Achieved"]
+          labels: ["Upcoming", "Current", "Moderation", "Achieved", "Not Achieved"]
         },
         options: {
           responsive: true,
@@ -126,7 +127,7 @@ export default {
 }
 
 #accordion {
-  width: 90%;
+  /* width: 90%; */
   display: flex;
   justify-content: center;
 }
