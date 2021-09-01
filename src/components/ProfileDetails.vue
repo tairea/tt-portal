@@ -26,6 +26,18 @@
         <div class="column" v-if="student.itlp">
           <ProfileITLP :student="student" />
         </div>
+
+        <div class="column" v-if="student.school_year >= 11" style="margin-top: 20px;">
+          <h2 class="creditTotal"
+        >
+          {{ student.creditTotal }}
+        </h2>
+        <h2 class="credits">
+          Total Credits
+          <br />
+          <br />
+        </h2>
+        </div>
         <!-- CREDITS -->
         <!-- <h2
           v-if="
@@ -250,15 +262,17 @@ export default {
 .credits {
   margin: 5px 0 0 0;
   color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 .creditTotal {
-  font-size: 1.5em;
+  font-size: 2em;
   background-color: #23d160;
   color: white;
   border-radius: 50%;
   text-align: center;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
