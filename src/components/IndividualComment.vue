@@ -74,7 +74,7 @@
                       {{ subjectStandards.assessmentCredits }}
                     </td>
 
-                    <!-- Assessment Status -->
+                    <!-- Assessment Status/Grade -->
                     <td class="statusCell has-text-right statusCellWidth">
                       <span
                         v-bind:class="subjectStandards.completed"

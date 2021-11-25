@@ -26,8 +26,11 @@
 
         <!-- REPORT TITLE -->
         <div class="report" style="margin-top: 60px;">
-          <h2 v-if="a4" style="font-weight: bold;">
+          <!-- <h2 v-if="a4" style="font-weight: bold;">
             Mid-Year Report<br /><span style="font-size: 1.5em;">2021</span>
+          </h2> -->
+          <h2 v-if="a4" style="font-weight: bold;">
+            End of Year Report<br /><span style="font-size: 1.5em;">2021</span>
           </h2>
         </div>
       </div>

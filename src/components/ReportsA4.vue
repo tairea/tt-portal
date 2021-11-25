@@ -58,12 +58,12 @@
       </section>
 
       <!-- PAGE 5: COMMENTS 4-->
-      <!-- <section
+      <section
         class="sheet padding-10mm"
         :style="{ backgroundImage: 'url(' + image + ')', backgroundSize: 'cover', backgroundPosition: '-295px 180px', backgroundRepeat: 'no-repeat'}"
       >
         <ProfileCommentsV2 :student="student" :fourthPage="true" />
-      </section> -->
+      </section>
 
 
     </div>
